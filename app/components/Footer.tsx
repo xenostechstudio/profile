@@ -1,6 +1,7 @@
 "use client";
 
 import { memo } from "react";
+import Logo from "./Logo";
 
 const Footer = memo(function Footer() {
   return (
@@ -10,12 +11,13 @@ const Footer = memo(function Footer() {
           {/* Company Info */}
           <div className="lg:col-span-2">
             <div className="mb-6">
-              <h3 className="text-2xl font-bold mb-2">
-                <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                  Xenostech
-                </span>
-                <span className="text-white ml-1">Studio</span>
-              </h3>
+              <Logo 
+                width={180} 
+                height={45}
+                className="mb-2"
+                primaryColor="#13bfb5"
+                secondaryColor="#60a5fa"
+              />
               <p className="text-gray-300 leading-relaxed">
                 Transforming business ideas into powerful applications. We specialize in custom software 
                 development and consulting services tailored to your unique business needs.

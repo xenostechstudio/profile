@@ -1,19 +1,21 @@
 "use client";
 
 import { memo } from "react";
+import Logo from "./Logo";
 
 const Hero = memo(function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-background to-gray-50 dark:to-gray-950 px-4">
       <div className="max-w-6xl mx-auto text-center">
         <div className="mb-8">
-          <h1 className="text-5xl md:text-7xl font-bold text-foreground mb-6 tracking-tight">
-            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              Xenostech
-            </span>
-            <br />
-            <span className="text-foreground">Studio</span>
-          </h1>
+          <div className="mb-6 flex justify-center">
+            <Logo 
+              width={280} 
+              height={70}
+              className="mb-4"
+            />
+          </div>
+          <h1 className="sr-only">Xenostech Studio</h1>
           <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
             Transform your business ideas into powerful applications. We specialize in custom software development 
             and consulting services tailored to your unique business needs.
