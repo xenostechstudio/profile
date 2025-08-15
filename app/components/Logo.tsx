@@ -1,9 +1,14 @@
+"use client";
+
+import { useState, useEffect } from "react";
+
 interface LogoProps {
   width?: number;
   height?: number;
   className?: string;
   primaryColor?: string;
   secondaryColor?: string;
+  animated?: boolean;
 }
 
 export default function Logo({ 
@@ -11,8 +16,58 @@ export default function Logo({
   height = 60, 
   className = "",
   primaryColor = "#13bfb5",
-  secondaryColor = "#13bfb5"
+  secondaryColor = "#13bfb5",
+  animated = false
 }: LogoProps) {
+  const [displayText, setDisplayText] = useState("XENOSTECH");
+  const [isTyping, setIsTyping] = useState(true);
+  const [showCursor, setShowCursor] = useState(true);
+  const fullText = "XENOSTECH";
+
+  useEffect(() => {
+    if (!animated) return;
+    
+    let timeout: NodeJS.Timeout;
+
+    if (isTyping) {
+      // Typing phase
+      if (displayText.length < fullText.length) {
+        timeout = setTimeout(() => {
+          setDisplayText(fullText.slice(0, displayText.length + 1));
+        }, 120);
+      } else {
+        // Pause before starting to delete
+        timeout = setTimeout(() => {
+          setIsTyping(false);
+        }, 3000);
+      }
+    } else {
+      // Deleting phase
+      if (displayText.length > 0) {
+        timeout = setTimeout(() => {
+          setDisplayText(displayText.slice(0, -1));
+        }, 80);
+      } else {
+        // Pause before starting to type again
+        timeout = setTimeout(() => {
+          setIsTyping(true);
+        }, 500);
+      }
+    }
+
+    return () => clearTimeout(timeout);
+  }, [displayText, isTyping, animated, fullText]);
+
+  // Cursor blinking effect
+  useEffect(() => {
+    if (!animated) return;
+    
+    const cursorInterval = setInterval(() => {
+      setShowCursor(prev => !prev);
+    }, 530);
+
+    return () => clearInterval(cursorInterval);
+  }, [animated]);
   return (
     <svg 
       width={width} 
@@ -52,7 +107,10 @@ export default function Logo({
         fill={primaryColor}
         letterSpacing="-1.2"
       >
-        XENOSTECH
+        {animated ? displayText : "XENOSTECH"}
+        {animated && showCursor && (
+          <tspan className="animate-pulse">|</tspan>
+        )}
       </text>
       
       {/* STUDIO capsule background - very close to XENOSTECH */}

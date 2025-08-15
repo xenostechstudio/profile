@@ -42,7 +42,7 @@ const About = memo(function About() {
           {/* Left Column - About Content */}
           <div>
             <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-              About <span className="text-blue-600">Xenostech Studio</span>
+              About <span className="text-[#13bfb5]">Xenostech Studio</span>
             </h2>
             <p className="text-lg text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
               We are a passionate team of software engineers and business consultants dedicated to 
@@ -64,7 +64,7 @@ const About = memo(function About() {
                   </div>
                   <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                     <div 
-                      className="bg-gradient-to-r from-blue-600 to-purple-600 h-2 rounded-full transition-all duration-1000"
+                      className="bg-gradient-to-r from-[#13bfb5] to-[#60a5fa] h-2 rounded-full transition-all duration-1000"
                       style={{ width: `${tech.level}%` }}
                     ></div>
                   </div>
@@ -78,11 +78,11 @@ const About = memo(function About() {
             <h3 className="text-2xl font-semibold text-foreground mb-8">Our Journey</h3>
             <div className="relative">
               {/* Timeline line */}
-              <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-blue-200 dark:bg-blue-800"></div>
+              <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-teal-200 dark:bg-teal-800"></div>
               
               {achievements.map((achievement, index) => (
                 <div key={index} className="relative flex items-start mb-8">
-                  <div className="flex items-center justify-center w-12 h-12 bg-blue-600 text-white rounded-full font-bold z-10">
+                  <div className="flex items-center justify-center w-12 h-12 bg-[#13bfb5] text-white rounded-full font-bold z-10">
                     {achievement.year.slice(-2)}
                   </div>
                   <div className="ml-6">
@@ -100,22 +100,22 @@ const About = memo(function About() {
         </div>
 
         {/* Stats Section */}
-        <div className="mt-20 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950 dark:to-purple-950 rounded-2xl p-12">
+        <div className="mt-20 bg-gradient-to-r from-teal-50 to-blue-50 dark:from-teal-950 dark:to-blue-950 rounded-2xl p-12">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
             <div>
-              <div className="text-4xl font-bold text-blue-600 mb-2">5+</div>
+              <div className="text-4xl font-bold text-[#13bfb5] mb-2">5+</div>
               <div className="text-gray-600 dark:text-gray-300">Years of Excellence</div>
             </div>
             <div>
-              <div className="text-4xl font-bold text-purple-600 mb-2">50+</div>
+              <div className="text-4xl font-bold text-[#13bfb5] mb-2">50+</div>
               <div className="text-gray-600 dark:text-gray-300">Projects Completed</div>
             </div>
             <div>
-              <div className="text-4xl font-bold text-green-600 mb-2">30+</div>
+              <div className="text-4xl font-bold text-[#13bfb5] mb-2">30+</div>
               <div className="text-gray-600 dark:text-gray-300">Happy Clients</div>
             </div>
             <div>
-              <div className="text-4xl font-bold text-orange-600 mb-2">24/7</div>
+              <div className="text-4xl font-bold text-[#13bfb5] mb-2">24/7</div>
               <div className="text-gray-600 dark:text-gray-300">Support Available</div>
             </div>
           </div>

@@ -47,7 +47,7 @@ const Services = memo(function Services() {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-            Our <span className="text-blue-600">Services</span>
+            Our <span className="text-[#13bfb5]">Services</span>
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
             We offer comprehensive software development and consulting services to help your business thrive in the digital age.
@@ -68,7 +68,7 @@ const Services = memo(function Services() {
               <ul className="space-y-2">
                 {service.features.map((feature, featureIndex) => (
                   <li key={featureIndex} className="flex items-center text-sm text-gray-500 dark:text-gray-400">
-                    <span className="w-2 h-2 bg-blue-600 rounded-full mr-3"></span>
+                    <span className="w-2 h-2 bg-[#13bfb5] rounded-full mr-3"></span>
                     {feature}
                   </li>
                 ))}
@@ -78,12 +78,12 @@ const Services = memo(function Services() {
         </div>
 
         <div className="mt-16 text-center">
-          <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-8 rounded-2xl text-white">
+          <div className="bg-gradient-to-r from-[#13bfb5] to-[#60a5fa] p-8 rounded-2xl text-white">
             <h3 className="text-2xl font-bold mb-4">Ready to Start Your Project?</h3>
-            <p className="text-blue-100 mb-6 max-w-2xl mx-auto">
+            <p className="text-teal-100 mb-6 max-w-2xl mx-auto">
               Let's discuss how we can help transform your business ideas into powerful digital solutions.
             </p>
-            <button className="px-8 py-3 bg-white text-blue-600 rounded-full font-semibold hover:bg-gray-100 transition-colors duration-300">
+            <button className="px-8 py-3 bg-white text-[#13bfb5] rounded-full font-semibold hover:bg-gray-100 transition-colors duration-300">
               Get Free Consultation
             </button>
           </div>
