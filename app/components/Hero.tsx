@@ -1,103 +1,106 @@
 "use client";
 
 import { memo, useEffect, useState } from "react";
-import Logo from "./Logo";
-import TypingText from "./TypingText";
-import TypingWords from "./TypingWords";
+import Link from "next/link";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 const Hero = memo(function Hero() {
   const [isVisible, setIsVisible] = useState(false);
+  const [scrollOpacity, setScrollOpacity] = useState(1);
 
   useEffect(() => {
     setIsVisible(true);
+
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const opacity = Math.max(0, 1 - scrollY / 150);
+      setScrollOpacity(opacity);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-white via-gray-50 to-teal-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 px-4">
-      {/* Simplified Animated Background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Floating Elements */}
-        <div className="absolute top-20 left-10 w-20 h-20 bg-[#13bfb5] opacity-10 rounded-full animate-pulse"></div>
-        <div className="absolute top-40 right-20 w-16 h-16 bg-[#60a5fa] opacity-15 rounded-lg rotate-45 animate-bounce"></div>
-        <div className="absolute bottom-32 left-20 w-12 h-12 bg-[#13bfb5] opacity-20 rounded-full animate-pulse"></div>
-        <div className="absolute bottom-20 right-32 w-24 h-24 bg-[#60a5fa] opacity-10 rounded-lg rotate-12 animate-bounce"></div>
-        
-        {/* Gradient Orbs */}
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-[#13bfb5] to-[#60a5fa] rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-[#60a5fa] to-[#13bfb5] rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white pt-48 pb-32">
+      {/* Floating Text Below Navbar - Only rendered on client to avoid hydration mismatch */}
+      {isVisible && (
+        <div 
+          className="fixed top-[68px] left-1/2 z-40 w-[98%] max-w-[1440px] flex justify-center pointer-events-none transition-all duration-300 ease-out"
+          style={{ 
+            opacity: scrollOpacity, 
+            transform: `translate(-50%, ${(1 - scrollOpacity) * -10}px) scale(${0.98 + (scrollOpacity * 0.02)})` 
+          }}
+          suppressHydrationWarning
+        >
+          <div className="w-full bg-white/10 backdrop-blur-md border border-slate-200/20 py-2.5 rounded-full shadow-sm flex items-center justify-center gap-6 px-6 text-slate-600 text-xs md:text-sm font-medium tracking-wide" suppressHydrationWarning>
+            <div className="flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.5)]"></span>
+              <span className="text-[#1a1f26]">Available for new projects</span>
+            </div>
+            <span className="text-slate-300 hidden md:inline">•</span>
+            <span className="hidden md:inline text-[#1a1f26]">Custom Development</span>
+            <span className="text-slate-300 hidden md:inline">•</span>
+            <span className="hidden md:inline text-[#1a1f26]">Cloud Infrastructure</span>
+            <span className="text-slate-300 hidden md:inline">•</span>
+            <span className="hidden md:inline text-[#1a1f26]">UI/UX Design</span>
+            <span className="text-slate-300 hidden md:inline">•</span>
+            <span className="hidden md:inline text-emerald-600">24/7 Support</span>
+          </div>
+        </div>
+      )}
+
+
+      {/* Background Image */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30"
+          style={{ backgroundImage: "url('/background.jpg')" }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-white via-white/80 to-white"></div>
       </div>
 
-      <div className="max-w-6xl mx-auto text-center relative z-10">
-        {/* Logo with typing animation */}
-        <div className={`mb-8 transition-all duration-1000 ease-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="mb-6 flex justify-center">
-            <div className="relative group">
-              <Logo 
-                width={320} 
-                height={80}
-                className="mb-4 transition-transform duration-300 group-hover:scale-105"
-                animated={true}
-              />
-              {/* Glow effect on hover */}
-              <div className="absolute inset-0 bg-gradient-to-r from-[#13bfb5] to-[#60a5fa] rounded-lg opacity-0 group-hover:opacity-20 transition-opacity duration-300 blur-lg -z-10"></div>
-            </div>
-          </div>
-          <h1 className="sr-only">Xenostech Studio</h1>
-        </div>
-
-        {/* Main content with staggered animations */}
-        <div className={`mb-8 transition-all duration-1000 ease-out delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
-            <TypingWords 
-              words={[
-                { word: "Transform" },
-                { word: "Build" },
-                { word: "Develop" }
-              ]}
-              className="text-2xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white"
-              typingSpeed={100}
-              deletingSpeed={70}
-              wordPauseTime={2000}
-              pauseTime={800}
-            /> Your Ideas Into
-            <span className="block bg-gradient-to-r from-[#13bfb5] to-[#60a5fa] bg-clip-text text-transparent animate-pulse">
-              Digital Reality
-            </span>
-          </h2>
-          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">
-            We craft innovative software solutions that drive business growth. From consultation to deployment, 
-            we're your trusted partner in digital transformation.
+      <div className="w-[98%] max-w-[1440px] mx-auto px-6 relative z-10 text-center">
+        {/* Main Heading & Subtext */}
+        <div className={cn(
+          "mb-12 transition-all duration-1000 ease-out flex flex-col items-center",
+          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+        )}>
+          <h1 className="font-serif text-3xl md:text-5xl lg:text-6xl font-normal text-[#1a1f26] mb-6 leading-[0.9] tracking-tight max-w-5xl">
+            Software Solutions, <br />
+            <span className="text-[#1a1f26]">Development, and </span>
+            <span className="text-[#1a1f26]">Innovation.</span>
+          </h1>
+          <p className="text-lg md:text-xl text-[#1a1f26] max-w-2xl leading-relaxed font-normal">
+            Transform your business ideas into high-performance digital products. 
+            We build scalable, modern applications with the latest technologies to help you ship faster and scale bigger.
           </p>
         </div>
         
-        {/* CTA Buttons with enhanced animations */}
-        <div className={`flex flex-col sm:flex-row gap-4 justify-center items-center mb-12 transition-all duration-1000 ease-out delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <button className="group relative px-8 py-4 bg-gradient-to-r from-[#13bfb5] to-[#0ea5a5] text-white rounded-full font-semibold text-lg transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl overflow-hidden">
-            <span className="relative z-10">Start Your Project</span>
-            <div className="absolute inset-0 bg-gradient-to-r from-[#0ea5a5] to-[#13bfb5] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-          </button>
-          <button className="group relative px-8 py-4 border-2 border-[#13bfb5] text-[#13bfb5] rounded-full font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-lg overflow-hidden">
-            <span className="relative z-10 transition-colors duration-300 group-hover:text-white">View Our Work</span>
-            <div className="absolute inset-0 bg-gradient-to-r from-[#13bfb5] to-[#60a5fa] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-          </button>
-        </div>
-
-        {/* Stats with staggered animations */}
-        <div className={`transition-all duration-1000 ease-out delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            <div className="p-6 group cursor-pointer">
-              <div className="text-3xl font-bold text-[#13bfb5] mb-2 transition-transform duration-300 group-hover:scale-110">50+</div>
-              <div className="text-gray-600 dark:text-gray-300">Projects Delivered</div>
-            </div>
-            <div className="p-6 group cursor-pointer">
-              <div className="text-3xl font-bold text-[#13bfb5] mb-2 transition-transform duration-300 group-hover:scale-110">24/7</div>
-              <div className="text-gray-600 dark:text-gray-300">Support Available</div>
-            </div>
-            <div className="p-6 group cursor-pointer">
-              <div className="text-3xl font-bold text-[#13bfb5] mb-2 transition-transform duration-300 group-hover:scale-110">100%</div>
-              <div className="text-gray-600 dark:text-gray-300">Client Satisfaction</div>
-            </div>
-          </div>
+        {/* CTA Buttons */}
+        <div className={cn(
+          "flex flex-col sm:flex-row gap-4 mb-8 justify-center transition-all duration-1000 ease-out delay-300",
+          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+        )}>
+          <Link 
+            href="#services"
+            className={cn(
+              buttonVariants({ size: "lg" }),
+              "h-14 px-8 rounded-full text-base font-bold shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300"
+            )}
+          >
+            Expertise
+          </Link>
+          <Link 
+            href="#portfolio"
+            className={cn(
+              buttonVariants({ variant: "outline", size: "lg" }),
+              "h-14 px-8 rounded-full text-base font-bold bg-white/50 border-slate-200 hover:bg-white hover:border-slate-300 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300"
+            )}
+          >
+            Products
+          </Link>
         </div>
       </div>
     </section>

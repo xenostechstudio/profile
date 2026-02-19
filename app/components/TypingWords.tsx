@@ -1,6 +1,7 @@
 "use client";
 
 import { memo, useEffect, useState } from "react";
+import { Badge } from "@/components/ui/badge";
 
 interface WordConfig {
   word: string;
@@ -77,7 +78,7 @@ const TypingWords = memo(function TypingWords({
   }, []);
 
   return (
-    <span className="inline-flex items-center gap-3">
+    <span className="inline-flex items-center gap-3" suppressHydrationWarning>
       <span className={className}>
         {displayText}
         <span 
@@ -87,15 +88,15 @@ const TypingWords = memo(function TypingWords({
         />
       </span>
       {currentWord.badge && displayText === currentWord.word && (
-        <span 
-          className={`px-3 py-1 text-sm font-medium rounded-full transition-all duration-300 ${badgeClassName}`}
+        <Badge 
+          className={`px-3 py-1 text-sm font-medium rounded-full transition-all duration-300 border-none ${badgeClassName}`}
           style={{
             backgroundColor: currentWord.badgeColor || '#13bfb5',
             color: 'white'
           }}
         >
           {currentWord.badge}
-        </span>
+        </Badge>
       )}
     </span>
   );

@@ -63,7 +63,7 @@ const TypingText = memo(function TypingText({
   }, []);
 
   return (
-    <span className={className}>
+    <span className={className} suppressHydrationWarning>
       {displayText}
       <span 
         className={`inline-block w-0.5 h-6 ml-1 bg-current transition-opacity duration-100 ${

@@ -2,6 +2,7 @@
 
 import { memo, useState } from "react";
 import ProductModal from "./ProductModal";
+import { cn } from "@/lib/utils";
 
 interface Product {
   id: string;
@@ -12,14 +13,16 @@ interface Product {
   category: string;
   status: string;
   color: string;
-  icon: string;
+  longDescription?: string;
+  techStack?: string[];
+  screenshots?: string[];
+  benefits?: string[];
+  pricing?: string;
 }
 
 const Portfolio = memo(function Portfolio() {
-  const [activeProduct, setActiveProduct] = useState<string | null>(null);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [clickedProduct, setClickedProduct] = useState<string | null>(null);
   const [animationOrigin, setAnimationOrigin] = useState<{x: number, y: number, width: number, height: number} | null>(null);
 
   const handleProductClick = (product: Product, event: React.MouseEvent) => {
@@ -31,14 +34,12 @@ const Portfolio = memo(function Portfolio() {
       height: rect.height
     };
     
-    setClickedProduct(product.id);
     setAnimationOrigin(origin);
     
     // Add slight delay for click animation feedback
     setTimeout(() => {
       setSelectedProduct(product);
       setIsModalOpen(true);
-      setClickedProduct(null);
     }, 100);
   };
 
@@ -49,160 +50,152 @@ const Portfolio = memo(function Portfolio() {
 
   const products: Product[] = [
     {
-      id: "eclinic",
-      name: "eClinic",
-      title: "Clinic Information System",
-      description: "Complete healthcare management solution designed for modern medical practices. Streamline patient care, appointments, and clinic operations with our comprehensive CIS platform.",
+      id: "sibi",
+      name: "SIBI",
+      title: "Sistem Isyarat Bahasa Indonesia",
+      description: "A comprehensive digital platform dedicated to learning and translating Indonesian Sign Language (SIBI). Breaking communication barriers with AI-powered gesture recognition and interactive learning modules.",
       features: [
-        "Patient Management & Records",
+        "AI Gesture Recognition",
+        "Interactive Dictionary",
+        "Real-time Translation",
+        "Community Forum",
+        "Learning Progress Tracking",
+        "Mobile App Support"
+      ],
+      category: "Education & AI",
+      status: "Live Project",
+      color: "#3b82f6"
+    },
+    {
+      id: "genggong",
+      name: "Genggong",
+      title: "Smart Campus Ecosystem",
+      description: "Integrated digital ecosystem for Pesantren Zainul Hasan Genggong. Modernizing education management with student information systems, digital library, and smart campus facilities.",
+      features: [
+        "Student Information System",
+        "Digital Library",
+        "Smart Attendance",
+        "E-Learning Platform",
+        "Financial Management",
+        "Parent Portal"
+      ],
+      category: "Smart Education",
+      status: "In Development",
+      color: "#10b981"
+    },
+    {
+      id: "cleanics",
+      name: "Cleanics",
+      title: "Clinic Information System",
+      description: "Complete healthcare management solution designed for modern medical practices. Streamline patient care, appointments, and clinic operations.",
+      features: [
+        "Patient Records",
         "Appointment Scheduling",
-        "Medical History Tracking",
         "Prescription Management",
-        "Billing & Insurance",
-        "Analytics & Reporting"
+        "Billing System"
       ],
       category: "Healthcare",
       status: "Production Ready",
-      color: "#13bfb5",
-      icon: "🏥"
+      color: "#13bfb5"
     },
     {
-      id: "esyncore",
-      name: "eSyncore",
-      title: "Enterprise Resource Planning",
-      description: "Powerful ERP solution that integrates all business processes into one unified system. Optimize operations, improve efficiency, and drive growth with intelligent automation.",
+      id: "syncore",
+      name: "Syncore",
+      title: "ERP Solution",
+      description: "Powerful ERP solution that integrates all business processes into one unified system. Optimize operations with intelligent automation.",
       features: [
         "Financial Management",
         "Inventory Control",
-        "Human Resources",
-        "Supply Chain Management",
-        "Project Management",
-        "Business Intelligence"
+        "HR Management",
+        "Analytics Dashboard"
       ],
       category: "Business",
       status: "Production Ready",
-      color: "#60a5fa",
-      icon: "🏢"
+      color: "#60a5fa"
     }
   ];
 
   return (
-    <section className="py-20 bg-gray-50 dark:bg-gray-900">
-      <div className="max-w-6xl mx-auto px-4">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 bg-[#13bfb5]/10 px-4 py-2 rounded-full mb-4">
-            <span className="text-[#13bfb5] font-semibold text-sm">💼 PORTFOLIO</span>
-          </div>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-            Ready-to-Use 
-            <span className="block bg-gradient-to-r from-[#13bfb5] to-[#60a5fa] bg-clip-text text-transparent">
-              Software Solutions
-            </span>
-          </h2>
-          <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            Proven enterprise-grade applications already serving businesses worldwide. 
-            Start using these powerful tools today.
-          </p>
-        </div>
+    <section id="portfolio" className="py-2 bg-white relative overflow-hidden">
+      {/* Layer 1: Most Outer - Boldest Border */}
+      <div className="w-[93%] mx-auto relative z-10 border border-slate-300 p-1 rounded-none">
+        {/* Layer 2: Middle - Medium Border */}
+        <div className="border border-slate-200 p-1 rounded-none">
+          {/* Layer 3: Inner - Lightest Border (Content) */}
+          <div className="bg-white rounded-none border border-slate-100 py-8 md:py-12 lg:py-16">
+            
+            <div className="w-full max-w-[1440px] mx-auto px-4 md:px-8 lg:px-12">
+              {/* Section Header */}
+              <div className="text-left mb-12">
+                <span className="text-xs font-bold text-[#1a1f26] uppercase tracking-[0.3em] mb-4 block">Our Work</span>
+                <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-normal text-[#1a1f26] mb-4 tracking-tight leading-[0.9]">
+                  Selected Work
+                </h2>
+                <p className="text-lg text-[#1a1f26] max-w-2xl leading-relaxed font-light">
+                  Showcasing our impact through innovative digital solutions and transformative projects.
+                </p>
+              </div>
 
-        {/* Product Grid */}
-        <div className="grid md:grid-cols-2 gap-8">
-          {products.map((product) => (
-            <div
-              key={product.id}
-              className={`group relative bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border-2 hover:border-opacity-50 cursor-pointer ${
-                clickedProduct === product.id ? 'scale-95 shadow-xl' : 
-                activeProduct === product.id ? 'scale-105 shadow-2xl' : 'hover:scale-102'
-              }`}
-              style={{
-                borderColor: activeProduct === product.id || clickedProduct === product.id ? product.color : 'transparent'
-              }}
-              onClick={(e) => handleProductClick(product, e)}
-              onMouseEnter={() => setActiveProduct(product.id)}
-              onMouseLeave={() => setActiveProduct(null)}
-            >
-              {/* Product Header */}
-              <div className="flex items-start justify-between mb-6">
-                <div className="flex items-center gap-4">
+              {/* Product List Layout */}
+              <div className="flex flex-col gap-8">
+                {products.map((product) => (
                   <div 
-                    className="w-16 h-16 rounded-2xl flex items-center justify-center text-2xl shadow-lg"
-                    style={{ backgroundColor: `${product.color}20`, color: product.color }}
+                    key={product.id} 
+                    className="group relative bg-white border border-slate-200 p-8 md:p-12 hover:border-slate-300 transition-all duration-300 flex flex-col lg:flex-row gap-8 lg:gap-20 cursor-pointer hover:shadow-lg hover:-translate-y-1 items-center"
+                    onClick={(e) => handleProductClick(product, e)}
+                    style={{
+                      borderLeft: `4px solid ${product.color}`
+                    }}
                   >
-                    {product.icon}
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">
-                      {product.name}
-                    </h3>
-                    <p className="text-sm font-medium text-gray-600 dark:text-gray-300">
-                      {product.title}
-                    </p>
-                  </div>
-                </div>
-                <div className="flex flex-col items-end gap-2">
-                  <span 
-                    className="px-3 py-1 rounded-full text-xs font-semibold text-white"
-                    style={{ backgroundColor: product.color }}
-                  >
-                    {product.status}
-                  </span>
-                  <span className="text-xs text-gray-500 dark:text-gray-400">
-                    {product.category}
-                  </span>
-                </div>
-              </div>
+                    {/* Left Side: Content */}
+                    <div className="flex-1 flex flex-col justify-center w-full">
+                      <div className="flex items-center gap-4 mb-6">
+                        <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest bg-slate-50 px-2 py-1 rounded-sm">{product.category}</span>
+                        <div className="flex items-center gap-2">
+                          <span className="relative flex h-2 w-2">
+                            <span className={`animate-ping absolute inline-flex h-full w-full rounded-full opacity-75 ${product.status === 'In Development' ? 'bg-amber-400' : 'bg-emerald-400'}`}></span>
+                            <span className={`relative inline-flex rounded-full h-2 w-2 ${product.status === 'In Development' ? 'bg-amber-500' : 'bg-emerald-500'}`}></span>
+                          </span>
+                          <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">{product.status}</span>
+                        </div>
+                      </div>
 
-              {/* Product Description */}
-              <p className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
-                {product.description}
-              </p>
+                      <div className="mb-6">
+                        <h3 className="text-3xl md:text-5xl font-serif font-medium text-[#1a1f26] tracking-tight mb-3 group-hover:text-black transition-colors">{product.name}</h3>
+                        <p className="text-sm font-medium text-slate-400 uppercase tracking-wider">{product.title}</p>
+                      </div>
+                      
+                      <p className="text-base md:text-lg text-slate-600 mb-8 leading-relaxed font-normal line-clamp-3 group-hover:text-slate-700 transition-colors max-w-xl">
+                        {product.description}
+                      </p>
 
-              {/* Features List */}
-              <div className="mb-6">
-                <h4 className="font-semibold text-gray-900 dark:text-white mb-3">Key Features:</h4>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                  {product.features.map((feature, index) => (
-                    <div key={index} className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-300">
-                      <div 
-                        className="w-2 h-2 rounded-full flex-shrink-0"
-                        style={{ backgroundColor: product.color }}
-                      ></div>
-                      {feature}
+                      <div className="flex flex-wrap gap-2">
+                        {product.features.slice(0, 3).map((feature, index) => (
+                          <span key={index} className="text-xs px-3 py-1.5 bg-slate-50 text-slate-600 border border-slate-100 font-medium tracking-wide rounded-sm group-hover:bg-slate-100 transition-colors">
+                            {feature}
+                          </span>
+                        ))}
+                      </div>
                     </div>
-                  ))}
-                </div>
-              </div>
 
-              {/* CTA Buttons */}
-              <div className="flex gap-3">
-                <button 
-                  className="flex-1 py-3 px-4 rounded-xl font-semibold text-white transition-all duration-300 hover:shadow-lg hover:scale-105"
-                  style={{ backgroundColor: product.color }}
-                  onClick={(e) => handleProductClick(product, e)}
-                >
-                  View Details
-                </button>
-                <button 
-                  className="flex-1 py-3 px-4 rounded-xl font-semibold border-2 transition-all duration-300 hover:shadow-lg hover:scale-105"
-                  style={{ 
-                    borderColor: product.color, 
-                    color: product.color,
-                    backgroundColor: 'transparent'
-                  }}
-                  onClick={(e) => handleProductClick(product, e)}
-                >
-                  Learn More
-                </button>
+                    {/* Right Side: Thumbnail Placeholder */}
+                    <div className="w-full lg:w-[45%] aspect-video bg-slate-100 rounded-sm border border-slate-200 overflow-hidden relative group-hover:border-slate-300 transition-colors shrink-0">
+                        <div className="absolute inset-0 flex items-center justify-center text-slate-300">
+                          <div className="text-center">
+                            <div className="w-16 h-16 rounded-full bg-slate-200/50 mx-auto mb-4 flex items-center justify-center">
+                              <span className="text-2xl opacity-50">🖼️</span>
+                            </div>
+                            <span className="text-sm font-medium uppercase tracking-widest">Project Preview</span>
+                          </div>
+                        </div>
+                        {/* Overlay on hover */}
+                        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300" />
+                    </div>
+                  </div>
+                ))}
               </div>
-
-              {/* Hover Effect Glow */}
-              <div 
-                className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-500 blur-xl -z-10"
-                style={{ backgroundColor: product.color }}
-              ></div>
             </div>
-          ))}
+          </div>
         </div>
       </div>
 

@@ -3,120 +3,66 @@
 import { memo } from "react";
 
 const About = memo(function About() {
-  const technologies = [
-    { name: "React/Next.js", level: 95 },
-    { name: "Node.js", level: 90 },
-    { name: "TypeScript", level: 92 },
-    { name: "Python", level: 88 },
-    { name: "Cloud Platforms", level: 85 },
-    { name: "Database Design", level: 90 }
-  ];
-
-  const achievements = [
-    {
-      year: "2024",
-      title: "50+ Applications Delivered",
-      description: "Successfully delivered custom applications across various industries"
-    },
-    {
-      year: "2023",
-      title: "Enterprise Partnerships",
-      description: "Established partnerships with major enterprise clients"
-    },
-    {
-      year: "2022",
-      title: "Cloud Migration Specialist",
-      description: "Became certified in major cloud platforms and migration strategies"
-    },
-    {
-      year: "2021",
-      title: "Founded Xenostech Studio",
-      description: "Started our journey to transform businesses through technology"
-    }
+  const stats = [
+    { value: "50+", label: "Projects" },
+    { value: "30+", label: "Clients" },
+    { value: "24/7", label: "Support" }
   ];
 
   return (
-    <section className="py-20 px-4 bg-background">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          {/* Left Column - About Content */}
-          <div>
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
-              About <span className="text-[#13bfb5]">Xenostech Studio</span>
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
-              We are a passionate team of software engineers and business consultants dedicated to 
-              bridging the gap between innovative technology and real-world business solutions.
-            </p>
-            <p className="text-lg text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
-              Our mission is to empower businesses of all sizes by creating custom applications that 
-              streamline operations, enhance productivity, and drive growth. We believe that every 
-              business is unique, and our solutions reflect that philosophy.
-            </p>
-
-            <div className="space-y-4">
-              <h3 className="text-2xl font-semibold text-foreground mb-4">Our Expertise</h3>
-              {technologies.map((tech, index) => (
-                <div key={index} className="mb-4">
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="text-foreground font-medium">{tech.name}</span>
-                    <span className="text-gray-500">{tech.level}%</span>
-                  </div>
-                  <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
-                    <div 
-                      className="bg-gradient-to-r from-[#13bfb5] to-[#60a5fa] h-2 rounded-full transition-all duration-1000"
-                      style={{ width: `${tech.level}%` }}
-                    ></div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Right Column - Timeline */}
-          <div>
-            <h3 className="text-2xl font-semibold text-foreground mb-8">Our Journey</h3>
-            <div className="relative">
-              {/* Timeline line */}
-              <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-teal-200 dark:bg-teal-800"></div>
-              
-              {achievements.map((achievement, index) => (
-                <div key={index} className="relative flex items-start mb-8">
-                  <div className="flex items-center justify-center w-12 h-12 bg-[#13bfb5] text-white rounded-full font-bold z-10">
-                    {achievement.year.slice(-2)}
-                  </div>
-                  <div className="ml-6">
-                    <h4 className="text-lg font-semibold text-foreground mb-2">
-                      {achievement.title}
-                    </h4>
-                    <p className="text-gray-600 dark:text-gray-300">
-                      {achievement.description}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+    <section id="about" className="py-24 px-4 bg-slate-50">
+      <div className="w-[98%] max-w-[1440px] mx-auto px-6">
+        {/* Header */}
+        <div className="text-left mb-12">
+          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-normal text-[#1a1f26] mb-4 tracking-tight leading-[0.9]">
+            About Xenostech Studio
+          </h2>
+          <p className="text-xl text-slate-500 max-w-2xl leading-relaxed font-normal">
+            We are a team of passionate developers and consultants dedicated to transforming businesses through innovative technology.
+          </p>
         </div>
 
-        {/* Stats Section */}
-        <div className="mt-20 bg-gradient-to-r from-teal-50 to-blue-50 dark:from-teal-950 dark:to-blue-950 rounded-2xl p-12">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
-            <div>
-              <div className="text-4xl font-bold text-[#13bfb5] mb-2">5+</div>
-              <div className="text-gray-600 dark:text-gray-300">Years of Excellence</div>
+        {/* Content Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Card 1: Philosophy */}
+          <div className="bg-white p-8 border border-slate-200 hover:border-slate-300 transition-colors duration-300">
+            <h3 className="text-2xl font-serif font-normal text-[#1a1f26] mb-4">Our Philosophy</h3>
+            <p className="text-slate-500 leading-relaxed font-light mb-8">
+              We believe in the power of simplicity. Our solutions are designed to be intuitive, scalable, and effective, removing complexity from your business processes.
+            </p>
+            <div className="w-12 h-12 flex items-center justify-center bg-slate-50 border border-slate-100 text-2xl">
+              💡
             </div>
-            <div>
-              <div className="text-4xl font-bold text-[#13bfb5] mb-2">50+</div>
-              <div className="text-gray-600 dark:text-gray-300">Projects Completed</div>
+          </div>
+
+          {/* Card 2: Mission */}
+          <div className="bg-white p-8 border border-slate-200 hover:border-slate-300 transition-colors duration-300">
+            <h3 className="text-2xl font-serif font-normal text-[#1a1f26] mb-4">Our Mission</h3>
+            <p className="text-slate-500 leading-relaxed font-light mb-8">
+              To empower businesses with technology that drives growth. We focus on delivering high-quality, sustainable software that stands the test of time.
+            </p>
+            <div className="w-12 h-12 flex items-center justify-center bg-slate-50 border border-slate-100 text-2xl">
+              🚀
             </div>
+          </div>
+
+          {/* Card 3: Impact/Stats */}
+          <div className="bg-[#1a1f26] p-8 border border-[#1a1f26] text-white flex flex-col justify-between">
             <div>
-              <div className="text-4xl font-bold text-[#13bfb5] mb-2">30+</div>
-              <div className="text-gray-600 dark:text-gray-300">Happy Clients</div>
+              <h3 className="text-2xl font-serif font-normal mb-8">Our Impact</h3>
+              <div className="grid grid-cols-1 gap-6">
+                {stats.map((stat, index) => (
+                  <div key={index} className="flex items-center justify-between border-b border-white/10 pb-2">
+                    <span className="text-3xl font-serif">{stat.value}</span>
+                    <span className="text-xs font-bold uppercase tracking-widest text-slate-400">{stat.label}</span>
+                  </div>
+                ))}
+              </div>
             </div>
-            <div>
-              <div className="text-4xl font-bold text-[#13bfb5] mb-2">24/7</div>
-              <div className="text-gray-600 dark:text-gray-300">Support Available</div>
+            <div className="mt-8 pt-8 border-t border-white/10">
+              <p className="text-slate-400 text-sm font-light italic">
+                "Building the future, one line of code at a time."
+              </p>
             </div>
           </div>
         </div>

@@ -1,145 +1,178 @@
 "use client";
 
 import { memo } from "react";
-import Logo from "./Logo";
+import Link from "next/link";
+import { LogoIcon, LogoText } from "./LogoV2";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { Separator } from "@/components/ui/separator";
+import { 
+  Github, 
+  Linkedin, 
+  Twitter, 
+  Mail, 
+  Instagram, 
+  ArrowRight,
+  MapPin,
+  Phone
+} from "lucide-react";
 
 const Footer = memo(function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
-    <footer className="bg-gray-900 text-white py-16 px-4">
-      <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* Company Info */}
-          <div className="lg:col-span-2">
-            <div className="mb-6">
-              <Logo 
-                width={180} 
-                height={45}
-                className="mb-2"
-                primaryColor="#13bfb5"
-                secondaryColor="#60a5fa"
-              />
-              <p className="text-gray-300 leading-relaxed">
-                Transforming business ideas into powerful applications. We specialize in custom software 
-                development and consulting services tailored to your unique business needs.
-              </p>
-            </div>
-            <div className="flex space-x-4">
-              <a 
-                href="#" 
-                className="w-10 h-10 bg-blue-600 hover:bg-blue-700 rounded-full flex items-center justify-center transition-colors duration-300"
-                aria-label="LinkedIn"
-              >
-                <span className="text-sm font-semibold">Li</span>
-              </a>
-              <a 
-                href="#" 
-                className="w-10 h-10 bg-gray-700 hover:bg-gray-600 rounded-full flex items-center justify-center transition-colors duration-300"
-                aria-label="GitHub"
-              >
-                <span className="text-sm font-semibold">Gh</span>
-              </a>
-              <a 
-                href="#" 
-                className="w-10 h-10 bg-blue-400 hover:bg-blue-500 rounded-full flex items-center justify-center transition-colors duration-300"
-                aria-label="Twitter"
-              >
-                <span className="text-sm font-semibold">Tw</span>
-              </a>
-              <a 
-                href="#" 
-                className="w-10 h-10 bg-red-600 hover:bg-red-700 rounded-full flex items-center justify-center transition-colors duration-300"
-                aria-label="Email"
-              >
-                <span className="text-sm font-semibold">@</span>
-              </a>
-            </div>
+    <footer className="bg-white text-slate-900 pt-24 pb-12 relative overflow-hidden">
+      <div className="w-[98%] max-w-[1440px] mx-auto px-6 relative z-10">
+        {/* Top CTA Section */}
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-20">
+          <div className="max-w-2xl">
+            <h2 className="text-3xl md:text-4xl font-serif font-normal text-[#1a1f26] tracking-tight mb-4">
+              Ready to transform your digital presence?
+            </h2>
+            <p className="text-slate-500 text-lg font-light">
+              Let's collaborate to build something extraordinary tailored to your business needs.
+            </p>
           </div>
-
-          {/* Services */}
-          <div>
-            <h4 className="text-lg font-semibold mb-4">Services</h4>
-            <ul className="space-y-2">
-              <li>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors duration-300">
-                  Custom Development
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors duration-300">
-                  Business Automation
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors duration-300">
-                  Cloud Solutions
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors duration-300">
-                  Digital Consulting
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors duration-300">
-                  MVP Development
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Company */}
-          <div>
-            <h4 className="text-lg font-semibold mb-4">Company</h4>
-            <ul className="space-y-2">
-              <li>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors duration-300">
-                  About Us
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors duration-300">
-                  Our Process
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors duration-300">
-                  Case Studies
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors duration-300">
-                  Blog
-                </a>
-              </li>
-              <li>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors duration-300">
-                  Contact
-                </a>
-              </li>
-            </ul>
+          <div className="flex-shrink-0">
+            <Link 
+              href="#contact"
+              className={cn(
+                buttonVariants({ size: "lg" }),
+                "bg-[#1a1f26] text-white hover:bg-slate-800 font-bold rounded-full px-8 h-12 text-base shadow-lg hover:shadow-xl transition-all duration-300 group"
+              )}
+            >
+              Start a Project
+              <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
+            </Link>
           </div>
         </div>
 
-        {/* Bottom Section */}
-        <div className="border-t border-gray-800 mt-12 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="text-gray-400 text-sm mb-4 md:mb-0">
-              © {new Date().getFullYear()} Xenostech Studio. All rights reserved.
+        <Separator className="bg-slate-200 mb-20" />
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-16">
+          {/* Brand Column */}
+          <div className="lg:col-span-4 flex flex-col items-center text-center space-y-6">
+            {/* Social Icons - Moved to top & Centered */}
+            <div className="flex items-center justify-center gap-4">
+              {[
+                { icon: Github, href: "https://github.com", label: "GitHub" },
+                { icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
+                { icon: Twitter, href: "https://twitter.com", label: "Twitter" },
+                { icon: Instagram, href: "https://instagram.com", label: "Instagram" },
+              ].map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-[#1a1f26] hover:text-white transition-all duration-300 hover:scale-110"
+                  aria-label={social.label}
+                >
+                  <social.icon className="w-5 h-5" />
+                </a>
+              ))}
             </div>
-            <div className="flex space-x-6 text-sm">
-              <a href="#" className="text-gray-400 hover:text-white transition-colors duration-300">
-                Privacy Policy
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors duration-300">
-                Terms of Service
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors duration-300">
-                Cookie Policy
-              </a>
+
+            <Link href="/" className="flex items-center gap-3 group justify-center">
+              <LogoIcon size={42} rounded={true} />
+              <LogoText 
+                width={160} 
+                height={42}
+                primaryColor="#1a1f26"
+                secondaryColor="#1a1f26"
+              />
+            </Link>
+            
+            <p className="text-slate-500 leading-relaxed max-w-sm font-light">
+              We craft high-performance software solutions that drive business growth. 
+              From custom development to digital transformation, we are your technical partner.
+            </p>
+          </div>
+
+          {/* Links Columns */}
+          <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-8">
+            {/* Services */}
+            <div>
+              <h4 className="font-serif font-normal text-lg mb-4 text-[#1a1f26]">Services</h4>
+              <ul className="space-y-2">
+                {[
+                  "Custom Development",
+                  "Business Automation",
+                  "Cloud Infrastructure",
+                  "Digital Consulting",
+                  "UI/UX Design",
+                  "Mobile Applications"
+                ].map((item) => (
+                  <li key={item}>
+                    <Link href="#" className="text-slate-500 hover:text-[#1a1f26] transition-colors duration-200 block py-0.5 font-light text-sm">
+                      {item}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Company */}
+            <div>
+              <h4 className="font-serif font-normal text-lg mb-4 text-[#1a1f26]">Company</h4>
+              <ul className="space-y-2">
+                {[
+                  "About Us",
+                  "Our Process",
+                  "Portfolio",
+                  "Careers",
+                  "Blog",
+                  "Contact"
+                ].map((item) => (
+                  <li key={item}>
+                    <Link href="#" className="text-slate-500 hover:text-[#1a1f26] transition-colors duration-200 block py-0.5 font-light text-sm">
+                      {item}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Contact Info */}
+            <div>
+              <h4 className="font-serif font-normal text-lg mb-4 text-[#1a1f26]">Contact</h4>
+              <ul className="space-y-3">
+                <li className="flex items-start gap-3 text-slate-500 font-light text-sm">
+                  <Mail className="w-4 h-4 mt-0.5 text-slate-400 shrink-0" />
+                  <a href="mailto:hello@xenostech.com" className="hover:text-[#1a1f26] transition-colors">
+                    hello@xenostech.com
+                  </a>
+                </li>
+                <li className="flex items-start gap-3 text-slate-500 font-light text-sm">
+                  <MapPin className="w-4 h-4 mt-0.5 text-slate-400 shrink-0" />
+                  <span>
+                    Jakarta, Indonesia
+                  </span>
+                </li>
+                <li className="flex items-start gap-3 text-slate-500 font-light text-sm">
+                  <Phone className="w-4 h-4 mt-0.5 text-slate-400 shrink-0" />
+                  <a href="tel:+6281234567890" className="hover:text-[#1a1f26] transition-colors">
+                    +62 812 3456 7890
+                  </a>
+                </li>
+              </ul>
             </div>
           </div>
-          <div className="text-center mt-6 text-gray-500 text-sm">
-            Built with ❤️ using Next.js & Tailwind CSS
+        </div>
+
+        <Separator className="bg-slate-200 mb-8" />
+
+        {/* Bottom Bar */}
+        <div className="flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-slate-500 font-light">
+          <div className="font-medium" suppressHydrationWarning>
+            © {currentYear} Xenostech Studio. All rights reserved.
+          </div>
+          <div className="flex items-center gap-1 font-medium">
+             Made With <span className="text-red-500">♥</span> Rifqi Muhammad Aziz
+             <span className="mx-2 text-slate-300">•</span>
+             <a href="https://github.com/rifqimuhammadaziz" target="_blank" rel="noopener noreferrer" className="hover:text-[#1a1f26] transition-colors">
+               GitHub
+             </a>
           </div>
         </div>
       </div>

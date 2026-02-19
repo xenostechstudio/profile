@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Source_Serif_4 } from "next/font/google";
 import "./globals.css";
 import StructuredData from "./components/StructuredData";
+import Navbar from "./components/Navbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,6 +17,15 @@ const geistMono = Geist_Mono({
   display: "swap",
   preload: false,
 });
+
+const sourceSerif = Source_Serif_4({
+  variable: "--font-serif",
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["200", "300", "400", "500", "600", "700"],
+});
+
+import { CookieCleaner } from "./components/CookieCleaner";
 
 export const metadata: Metadata = {
   title: "Xenostech Studio - Custom Software Development & Business Consulting",
@@ -75,19 +85,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <StructuredData />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-        <meta name="theme-color" content="#2563eb" />
-        <meta name="msapplication-TileColor" content="#2563eb" />
+        <meta name="theme-color" content="#333f4d" />
+        <meta name="msapplication-TileColor" content="#333f4d" />
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${sourceSerif.variable} antialiased`}
       >
+        <CookieCleaner />
+        <Navbar />
         {children}
       </body>
     </html>
