@@ -10,22 +10,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-
-interface Product {
-  id: string;
-  name: string;
-  title: string;
-  description: string;
-  features: string[];
-  category: string;
-  status: string;
-  color: string;
-  longDescription?: string;
-  techStack?: string[];
-  screenshots?: string[];
-  benefits?: string[];
-  pricing?: string;
-}
+import type { Product } from "@/lib/products";
 
 interface ProductModalProps {
   product: Product | null;

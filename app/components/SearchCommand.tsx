@@ -33,10 +33,10 @@ const SEARCH_ITEMS: SearchItem[] = [
   // Sections
   { title: "Home", href: "/", category: "Navigation", icon: Home },
   { title: "Services", href: "#services", category: "Navigation", icon: Zap },
-  { title: "Products", href: "#portfolio", category: "Navigation", icon: Box },
+  { title: "Products", href: "#work", category: "Navigation", icon: Box },
   { title: "Process", href: "#workflow", category: "Navigation", icon: Layout },
   { title: "Skills", href: "#about", category: "Navigation", icon: Code2 },
-  { title: "Contact", href: "#contact", category: "Navigation", icon: Phone },
+  { title: "Contact", href: "#about", category: "Navigation", icon: Phone },
   
   // Services
   { title: "Custom Development", href: "#services", category: "Services", description: "Tailored software solutions", icon: Monitor },
@@ -45,8 +45,8 @@ const SEARCH_ITEMS: SearchItem[] = [
   { title: "Digital Consulting", href: "#services", category: "Services", description: "Expert advice", icon: User },
   
   // Products
-  { title: "eClinic", href: "#portfolio", category: "Products", description: "Healthcare management", icon: Stethoscope },
-  { title: "eSyncore", href: "#portfolio", category: "Products", description: "Enterprise ERP", icon: Activity },
+  { title: "eClinic", href: "#work", category: "Products", description: "Healthcare management", icon: Stethoscope },
+  { title: "eSyncore", href: "#work", category: "Products", description: "Enterprise ERP", icon: Activity },
 ];
 
 export function SearchCommand({ 

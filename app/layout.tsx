@@ -56,7 +56,7 @@ export const metadata: Metadata = {
         alt: 'Xenostech Studio - Software Development & Consulting',
       },
     ],
-    locale: 'en_US',
+    locale: 'id_ID',
     type: 'website',
   },
   twitter: {
@@ -85,7 +85,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="id" suppressHydrationWarning>
       <head>
         <StructuredData />
         <link rel="preconnect" href="https://fonts.googleapis.com" />

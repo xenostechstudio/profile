@@ -28,7 +28,7 @@ import { SearchCommand } from "./SearchCommand";
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [language, setLanguage] = useState<'en' | 'id'>('en');
+  const [language, setLanguage] = useState<'en' | 'id'>('id');
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -68,8 +68,13 @@ const Navbar = () => {
         { title: "Digital Consulting", href: "#services", description: "Expert advice on your digital transformation." },
       ],
       productItems: [
-        { title: "eClinic", href: "#portfolio", description: "Healthcare management platform." },
-        { title: "eSyncore", href: "#portfolio", description: "Enterprise ERP solution." },
+        { title: "Cleanics", href: "#work", description: "Clinic information system." },
+        { title: "Syncore", href: "#work", description: "Enterprise ERP solution." },
+        { title: "SiRetail", href: "#work", description: "Retail management platform." },
+        { title: "Belio", href: "#work", description: "Core business ERP for SMBs." },
+        { title: "eSalut", href: "#work", description: "UT service center system." },
+        { title: "Lifetrack", href: "#work", description: "Mobile-first HRIS app." },
+        { title: "Schola", href: "#work", description: "School management system." },
       ]
     },
     id: {
@@ -89,8 +94,13 @@ const Navbar = () => {
         { title: "Konsultasi Digital", href: "#services", description: "Saran ahli tentang transformasi digital Anda." },
       ],
       productItems: [
-        { title: "eClinic", href: "#portfolio", description: "Platform manajemen kesehatan." },
-        { title: "eSyncore", href: "#portfolio", description: "Solusi ERP perusahaan." },
+        { title: "Cleanics", href: "#work", description: "Sistem informasi klinik." },
+        { title: "Syncore", href: "#work", description: "Solusi ERP perusahaan." },
+        { title: "SiRetail", href: "#work", description: "Platform manajemen ritel." },
+        { title: "Belio", href: "#work", description: "ERP bisnis inti untuk UMKM." },
+        { title: "eSalut", href: "#work", description: "Sistem pusat layanan UT." },
+        { title: "Lifetrack", href: "#work", description: "Aplikasi HRIS mobile." },
+        { title: "Schola", href: "#work", description: "Sistem manajemen sekolah." },
       ]
     }
   };
@@ -200,7 +210,7 @@ const Navbar = () => {
 
                 <NavigationMenuItem>
                   <NavigationMenuLink asChild>
-                    <Link href="#portfolio" className={cn(navigationMenuTriggerStyle(), "bg-transparent text-white/80 hover:bg-white/10 hover:text-white h-7 px-3 text-xs font-medium focus:bg-white/10 focus:text-white transition-all duration-300")}>
+                    <Link href="#work" className={cn(navigationMenuTriggerStyle(), "bg-transparent text-white/80 hover:bg-white/10 hover:text-white h-7 px-3 text-xs font-medium focus:bg-white/10 focus:text-white transition-all duration-300")}>
                       {t.marketplace}
                     </Link>
                   </NavigationMenuLink>
@@ -242,7 +252,7 @@ const Navbar = () => {
           </div>
 
           <Link 
-            href="#contact"
+            href="#about"
             className={cn(
               buttonVariants({ variant: "default", size: "default" }),
               "hidden sm:flex items-center gap-2 bg-white text-[#1a1f26] hover:bg-white/90 rounded-full h-7 px-4 text-xs font-bold transition-all duration-300 hover:scale-105"
@@ -275,10 +285,10 @@ const Navbar = () => {
                 <SheetDescription className="sr-only">Mobile navigation menu</SheetDescription>
                 <div className="flex flex-col gap-4 mt-8" suppressHydrationWarning>
                   <Link href="#services" className="text-lg font-medium hover:text-brand" onClick={() => setIsMobileMenuOpen(false)}>{t.services}</Link>
-                  <Link href="#portfolio" className="text-lg font-medium hover:text-brand" onClick={() => setIsMobileMenuOpen(false)}>{t.products}</Link>
+                  <Link href="#work" className="text-lg font-medium hover:text-brand" onClick={() => setIsMobileMenuOpen(false)}>{t.products}</Link>
                   <Link href="#workflow" className="text-lg font-medium hover:text-brand" onClick={() => setIsMobileMenuOpen(false)}>{t.process}</Link>
                   <Link href="#about" className="text-lg font-medium hover:text-brand" onClick={() => setIsMobileMenuOpen(false)}>{t.skills}</Link>
-                  <Link href="#contact" className="text-lg font-medium hover:text-brand" onClick={() => setIsMobileMenuOpen(false)}>{t.contact}</Link>
+                  <Link href="#about" className="text-lg font-medium hover:text-brand" onClick={() => setIsMobileMenuOpen(false)}>{t.contact}</Link>
                   
                   <div className="flex items-center justify-between py-4 border-t border-white/10 mt-2">
                     <span className="text-white/60">{t.languageLabel}</span>
@@ -295,7 +305,7 @@ const Navbar = () => {
 
                   <hr className="border-white/10 my-2" />
                   <Link 
-                    href="#contact" 
+                    href="#about" 
                     onClick={() => setIsMobileMenuOpen(false)}
                     className={cn(
                       buttonVariants({ variant: "default" }),

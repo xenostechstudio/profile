@@ -35,7 +35,7 @@ const Footer = memo(function Footer() {
           </div>
           <div className="flex-shrink-0">
             <Link 
-              href="#contact"
+              href="#about"
               className={cn(
                 buttonVariants({ size: "lg" }),
                 "bg-[#1a1f26] text-white hover:bg-slate-800 font-bold rounded-full px-8 h-12 text-base shadow-lg hover:shadow-xl transition-all duration-300 group"
