@@ -29,7 +29,7 @@ const Footer = memo(function Footer() {
             <h2 className="text-3xl md:text-4xl font-serif font-normal text-[#1a1f26] tracking-tight mb-4">
               Ready to transform your digital presence?
             </h2>
-            <p className="text-slate-500 text-lg font-light">
+            <p className="text-lg md:text-xl text-slate-600 max-w-3xl leading-relaxed font-light">
               Let's collaborate to build something extraordinary tailored to your business needs.
             </p>
           </div>
@@ -51,29 +51,8 @@ const Footer = memo(function Footer() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-16">
           {/* Brand Column */}
-          <div className="lg:col-span-4 flex flex-col items-center text-center space-y-6">
-            {/* Social Icons - Moved to top & Centered */}
-            <div className="flex items-center justify-center gap-4">
-              {[
-                { icon: Github, href: "https://github.com", label: "GitHub" },
-                { icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
-                { icon: Twitter, href: "https://twitter.com", label: "Twitter" },
-                { icon: Instagram, href: "https://instagram.com", label: "Instagram" },
-              ].map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-[#1a1f26] hover:text-white transition-all duration-300 hover:scale-110"
-                  aria-label={social.label}
-                >
-                  <social.icon className="w-5 h-5" />
-                </a>
-              ))}
-            </div>
-
-            <Link href="/" className="flex items-center gap-3 group justify-center">
+          <div className="lg:col-span-4 flex flex-col items-center lg:items-start text-center lg:text-left space-y-6">
+            <Link href="/" className="flex items-center gap-3 group">
               <LogoIcon size={42} rounded={true} />
               <LogoText 
                 width={160} 
@@ -83,7 +62,7 @@ const Footer = memo(function Footer() {
               />
             </Link>
             
-            <p className="text-slate-500 leading-relaxed max-w-sm font-light">
+            <p className="text-lg text-slate-600 max-w-sm leading-relaxed font-normal">
               We craft high-performance software solutions that drive business growth. 
               From custom development to digital transformation, we are your technical partner.
             </p>
@@ -163,11 +142,33 @@ const Footer = memo(function Footer() {
         <Separator className="bg-slate-200 mb-8" />
 
         {/* Bottom Bar */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-slate-500 font-light">
-          <div className="font-medium" suppressHydrationWarning>
+        <div className="flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-slate-500 font-light relative">
+          <div className="font-normal" suppressHydrationWarning>
             © {currentYear} Xenostech Studio. All rights reserved.
           </div>
-          <div className="flex items-center gap-1 font-medium">
+
+          {/* Social Icons - Centered Absolute */}
+          <div className="flex items-center justify-center gap-4 md:absolute md:left-1/2 md:-translate-x-1/2">
+            {[
+              { icon: Github, href: "https://github.com", label: "GitHub" },
+              { icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
+              { icon: Twitter, href: "https://twitter.com", label: "Twitter" },
+              { icon: Instagram, href: "https://instagram.com", label: "Instagram" },
+            ].map((social) => (
+              <a
+                key={social.label}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-[#1a1f26] hover:text-white transition-all duration-300 hover:scale-110"
+                aria-label={social.label}
+              >
+                <social.icon className="w-4 h-4" />
+              </a>
+            ))}
+          </div>
+
+          <div className="flex items-center gap-1 font-normal">
              Made With <span className="text-red-500">♥</span> Rifqi Muhammad Aziz
              <span className="mx-2 text-slate-300">•</span>
              <a href="https://github.com/rifqimuhammadaziz" target="_blank" rel="noopener noreferrer" className="hover:text-[#1a1f26] transition-colors">

@@ -1,10 +1,8 @@
 "use client";
 
 import { memo, useState } from "react";
-import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Code2, Cog, Cloud, LineChart, ShieldCheck, Rocket, ArrowRight, Check } from "lucide-react";
-import Link from "next/link";
+import { Code2, Cog, Cloud, LineChart, ShieldCheck, Rocket } from "lucide-react";
 
 const Services = memo(function Services() {
   const [activeTab, setActiveTab] = useState(0);
@@ -101,7 +99,7 @@ const Services = memo(function Services() {
                       id={`service-tab-${index}`}
                       tabIndex={activeTab === index ? 0 : -1}
                       className={cn(
-                        "relative flex items-start gap-4 p-5 rounded-none text-left transition-all duration-300 group border border-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-slate-300",
+                        "relative flex items-center gap-4 p-5 rounded-none text-left transition-all duration-300 group border border-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-slate-300",
                         activeTab === index 
                           ? "bg-slate-50 border-slate-200 shadow-sm text-[#1a1f26] font-medium"
                           : "text-slate-500 hover:bg-slate-50/50 hover:text-[#1a1f26]"
@@ -114,7 +112,7 @@ const Services = memo(function Services() {
                           style={{ backgroundColor: accents[index % accents.length] }}
                         />
                       )}
-                      <div className="flex-shrink-0 mt-0.5">
+                      <div className="flex-shrink-0">
                         <service.icon
                           size={22}
                           strokeWidth={1.5}
@@ -124,68 +122,40 @@ const Services = memo(function Services() {
                           )}
                         />
                       </div>
-                      <div className="flex flex-col">
-                        <span className="text-lg tracking-tight">{service.title}</span>
-                        <span className="text-xs text-slate-500 mt-1 max-w-[38ch]">
-                          {service.description}
-                        </span>
-                      </div>
+                      <span className="text-lg tracking-tight">{service.title}</span>
                     </button>
                   ))}
                 </div>
 
                 <div className="w-full lg:w-2/3">
                   <div
-                    className="relative h-full min-h-[550px] rounded-none bg-[#f8fafc] p-8 md:p-14 overflow-hidden border border-slate-100/50"
+                    className="relative h-full min-h-[400px] rounded-none bg-[#f8fafc] p-8 md:p-12 overflow-hidden border border-slate-100/50"
                     role="tabpanel"
                     id={`service-panel-${activeTab}`}
                     aria-labelledby={`service-tab-${activeTab}`}
                     style={{ borderTopWidth: 4, borderTopColor: accents[activeTab % accents.length] }}
                   >
-                    <div className="relative z-10 flex flex-col h-full justify-between">
+                    <div className="relative z-10 flex flex-col h-full">
                       <div>
-                        <div
-                          className="w-14 h-14 rounded-none bg-white flex items-center justify-center mb-10 shadow-sm animate-in fade-in zoom-in duration-500 border"
-                          style={{ borderColor: accents[activeTab % accents.length] + "33" }}
-                        >
-                          {(() => {
-                            const Icon = services[activeTab].icon;
-                            return <Icon size={26} strokeWidth={1.5} className="text-[#1a1f26]" />;
-                          })()}
-                        </div>
-                        
-                        <h3 key={activeTab} className="text-3xl md:text-4xl font-serif font-normal text-[#1a1f26] mb-6 animate-in fade-in slide-in-from-bottom-2 duration-500 tracking-tight">
+                        <h3 key={activeTab} className="text-2xl md:text-3xl font-serif font-medium text-[#1a1f26] mb-6 animate-in fade-in slide-in-from-bottom-2 duration-500 tracking-tight">
                           {services[activeTab].title}
                         </h3>
                         
-                        <p key={activeTab + 'desc'} className="text-lg md:text-xl text-slate-500 mb-10 leading-relaxed max-w-2xl animate-in fade-in slide-in-from-bottom-3 duration-500 delay-100 font-normal">
+                        <p key={activeTab + 'desc'} className="text-base md:text-lg text-slate-600 mb-8 leading-relaxed animate-in fade-in slide-in-from-bottom-3 duration-500 delay-100 font-normal">
                           {services[activeTab].detailedDesc}
                         </p>
 
-                        <div className="text-xs font-bold text-slate-400 uppercase tracking-[0.2em] mb-3">
-                          Includes
+                        <div className="text-xs font-bold text-slate-400 uppercase tracking-[0.2em] mb-6">
+                          Key Features
                         </div>
-                        <div key={activeTab + 'features'} className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-14 animate-in fade-in slide-in-from-bottom-4 duration-500 delay-200">
+                        <div key={activeTab + 'features'} className="grid grid-cols-1 md:grid-cols-2 gap-4 animate-in fade-in slide-in-from-bottom-4 duration-500 delay-200">
                           {services[activeTab].features.map((feature, idx) => (
-                            <div key={idx} className="flex items-center gap-3 text-slate-600 font-medium bg-white px-5 py-4 rounded-none border border-slate-200/50 backdrop-blur-sm">
-                              <Check size={18} strokeWidth={2} className="text-[#1a1f26]" />
-                              <span className="tracking-tight">{feature}</span>
+                            <div key={idx} className="flex items-center gap-3 text-slate-600 font-medium text-sm">
+                              <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: accents[activeTab % accents.length] }}></div>
+                              <span className="tracking-wide">{feature}</span>
                             </div>
                           ))}
                         </div>
-                      </div>
-
-                      <div key={activeTab + 'cta'} className="animate-in fade-in slide-in-from-bottom-5 duration-500 delay-300">
-                        <Link 
-                          href="#contact"
-                          className={cn(
-                            buttonVariants({ size: "lg" }),
-                            "h-14 px-8 rounded-none text-base font-bold bg-[#1a1f26] text-white hover:bg-slate-800 shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300"
-                          )}
-                        >
-                          Consult This Service
-                          <ArrowRight className="ml-2 w-4 h-4" />
-                        </Link>
                       </div>
                     </div>
                   </div>

@@ -67,15 +67,19 @@ const Hero = memo(function Hero() {
           "mb-12 transition-all duration-1000 ease-out flex flex-col items-center",
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
         )}>
-          <h1 className="font-serif text-3xl md:text-5xl lg:text-6xl font-normal text-[#1a1f26] mb-6 leading-[0.9] tracking-tight max-w-5xl">
+          <div className="flex items-center gap-4 mb-6 opacity-80">
+            <span className="w-12 h-[1px] bg-gradient-to-r from-transparent to-[#1a1f26]/50"></span>
+            <span className="text-sm md:text-sm text-[#1a1f26] max-w-2xl leading-relaxed font-normal">
+              Transform your business ideas into digital products
+            </span>
+            <span className="w-12 h-[1px] bg-gradient-to-l from-transparent to-[#1a1f26]/50"></span>
+          </div>
+
+          <h1 className="font-serif text-3xl md:text-5xl lg:text-6xl font-medium text-[#1a1f26] mb-8 leading-[1.1] tracking-tight max-w-5xl drop-shadow-sm">
             Software Solutions, <br />
             <span className="text-[#1a1f26]">Development, and </span>
-            <span className="text-[#1a1f26]">Innovation.</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1a1f26] to-slate-500">Innovation.</span>
           </h1>
-          <p className="text-lg md:text-xl text-[#1a1f26] max-w-2xl leading-relaxed font-normal">
-            Transform your business ideas into high-performance digital products. 
-            We build scalable, modern applications with the latest technologies to help you ship faster and scale bigger.
-          </p>
         </div>
         
         {/* CTA Buttons */}
@@ -84,22 +88,13 @@ const Hero = memo(function Hero() {
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
         )}>
           <Link 
-            href="#services"
-            className={cn(
-              buttonVariants({ size: "lg" }),
-              "h-14 px-8 rounded-full text-base font-bold shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300"
-            )}
-          >
-            Expertise
-          </Link>
-          <Link 
             href="#portfolio"
             className={cn(
-              buttonVariants({ variant: "outline", size: "lg" }),
-              "h-14 px-8 rounded-full text-base font-bold bg-white/50 border-slate-200 hover:bg-white hover:border-slate-300 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300"
+              buttonVariants({ size: "lg" }),
+              "h-14 px-8 rounded-full text-base font-bold shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 bg-gradient-to-r from-[#1a1f26] to-slate-700 text-white hover:opacity-90"
             )}
           >
-            Products
+            Project Overview
           </Link>
         </div>
       </div>
