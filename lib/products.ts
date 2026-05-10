@@ -16,6 +16,24 @@ export interface Product {
 
 export const products: Product[] = [
   {
+    id: "garudaspace",
+    name: "GarudaSpace",
+    title: "E-commerce Phone Store Platform",
+    description:
+      "Modern e-commerce platform for phone retailers selling new and second-hand units. Integrated Duitku payments, Biteship shipping, IMEI-level stock tracking, and warranty management — all in one unified storefront and admin panel.",
+    features: [
+      "Product Catalog & Variants",
+      "Duitku Payment Integration",
+      "Biteship Shipping",
+      "IMEI Stock Tracking",
+      "Warranty Management",
+      "Admin Panel",
+    ],
+    category: "E-commerce",
+    status: "In Development",
+    color: "#dc2626",
+  },
+  {
     id: "cleanics",
     name: "Cleanics",
     title: "Clinic Information System",

@@ -26,6 +26,7 @@ const sourceSerif = Source_Serif_4({
 });
 
 import { CookieCleaner } from "./components/CookieCleaner";
+import { LanguageProvider } from "./providers/language";
 
 export const metadata: Metadata = {
   title: "Xenostech Studio - Custom Software Development & Business Consulting",
@@ -99,8 +100,10 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${sourceSerif.variable} antialiased`}
       >
         <CookieCleaner />
-        <Navbar />
-        {children}
+        <LanguageProvider>
+          <Navbar />
+          {children}
+        </LanguageProvider>
       </body>
     </html>
   );

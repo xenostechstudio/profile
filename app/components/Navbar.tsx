@@ -24,15 +24,16 @@ import { Menu, Search, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { SearchCommand } from "./SearchCommand";
+import { useLanguage } from "@/app/providers/language";
+import { translations } from "@/lib/translations";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [language, setLanguage] = useState<'en' | 'id'>('id');
   const [isLoaded, setIsLoaded] = useState(false);
+  const { language, toggleLanguage } = useLanguage();
 
   useEffect(() => {
-    // Initial delay before showing the navbar
     const timer = setTimeout(() => {
       setIsLoaded(true);
     }, 100);
@@ -50,71 +51,12 @@ const Navbar = () => {
     return () => document.removeEventListener("keydown", down);
   }, []);
 
-  const content = {
-    en: {
-      services: "Services",
-      products: "Products",
-      process: "Process",
-      skills: "Skills",
-      marketplace: "Marketplace",
-      contact: "Contact",
-      search: "Search...",
-      contactUs: "Contact Us",
-      languageLabel: "Language",
-      serviceItems: [
-        { title: "Custom Development", href: "#services", description: "Tailored software solutions for your business." },
-        { title: "Business Automation", href: "#services", description: "Streamline your workflows with AI and automation." },
-        { title: "Cloud Solutions", href: "#services", description: "Scalable and secure cloud infrastructure." },
-        { title: "Digital Consulting", href: "#services", description: "Expert advice on your digital transformation." },
-      ],
-      productItems: [
-        { title: "Cleanics", href: "#work", description: "Clinic information system." },
-        { title: "Syncore", href: "#work", description: "Enterprise ERP solution." },
-        { title: "SiRetail", href: "#work", description: "Retail management platform." },
-        { title: "Belio", href: "#work", description: "Core business ERP for SMBs." },
-        { title: "eSalut", href: "#work", description: "UT service center system." },
-        { title: "Lifetrack", href: "#work", description: "Mobile-first HRIS app." },
-        { title: "Schola", href: "#work", description: "School management system." },
-      ]
-    },
-    id: {
-      services: "Layanan",
-      products: "Produk",
-      process: "Proses",
-      skills: "Keahlian",
-      marketplace: "Pasar",
-      contact: "Kontak",
-      search: "Cari...",
-      contactUs: "Hubungi Kami",
-      languageLabel: "Bahasa",
-      serviceItems: [
-        { title: "Pengembangan Kustom", href: "#services", description: "Solusi perangkat lunak yang disesuaikan untuk bisnis Anda." },
-        { title: "Otomasi Bisnis", href: "#services", description: "Rampingkan alur kerja Anda dengan AI dan otomasi." },
-        { title: "Solusi Cloud", href: "#services", description: "Infrastruktur cloud yang skalabel dan aman." },
-        { title: "Konsultasi Digital", href: "#services", description: "Saran ahli tentang transformasi digital Anda." },
-      ],
-      productItems: [
-        { title: "Cleanics", href: "#work", description: "Sistem informasi klinik." },
-        { title: "Syncore", href: "#work", description: "Solusi ERP perusahaan." },
-        { title: "SiRetail", href: "#work", description: "Platform manajemen ritel." },
-        { title: "Belio", href: "#work", description: "ERP bisnis inti untuk UMKM." },
-        { title: "eSalut", href: "#work", description: "Sistem pusat layanan UT." },
-        { title: "Lifetrack", href: "#work", description: "Aplikasi HRIS mobile." },
-        { title: "Schola", href: "#work", description: "Sistem manajemen sekolah." },
-      ]
-    }
-  };
-
-  const toggleLanguage = () => {
-    setLanguage(prev => prev === 'en' ? 'id' : 'en');
-  };
-
-  const t = content[language];
+  const t = translations[language].nav;
   const services = t.serviceItems;
   const products = t.productItems;
 
   return (
-    <nav 
+    <nav
       suppressHydrationWarning
       className={cn(
         "fixed left-1/2 -translate-x-1/2 z-50 w-[98%] max-w-[1440px] transition-all duration-1000 cubic-bezier(0.32, 0.72, 0, 1)",
@@ -127,11 +69,11 @@ const Navbar = () => {
           <Link href="/" className="flex items-center gap-3 pl-1.5 pr-4 py-1.5 transition-opacity hover:opacity-80">
             <LogoIcon size={32} rounded={true} />
             <div className="block overflow-hidden whitespace-nowrap w-[140px]">
-              <LogoText 
-                width={140} 
-                height={32} 
-                primaryColor="#ffffff" 
-                secondaryColor="#ffffff" 
+              <LogoText
+                width={140}
+                height={32}
+                primaryColor="#ffffff"
+                secondaryColor="#ffffff"
               />
             </div>
           </Link>
@@ -140,7 +82,6 @@ const Navbar = () => {
           <div className="hidden lg:block">
             <NavigationMenu>
               <NavigationMenuList className="gap-1">
-                {/* Services Dropdown */}
                 <NavigationMenuItem>
                   <NavigationMenuTrigger className="bg-transparent text-white/80 hover:bg-white/10 hover:text-white h-7 px-3 text-xs font-medium focus:bg-white/10 focus:text-white transition-all duration-300">
                     {t.services}
@@ -166,7 +107,6 @@ const Navbar = () => {
                   </NavigationMenuContent>
                 </NavigationMenuItem>
 
-                {/* Portfolio Dropdown */}
                 <NavigationMenuItem>
                   <NavigationMenuTrigger className="bg-transparent text-white/80 hover:bg-white/10 hover:text-white h-7 px-3 text-xs font-medium focus:bg-white/10 focus:text-white transition-all duration-300">
                     {t.products}
@@ -222,25 +162,23 @@ const Navbar = () => {
 
         {/* Right Side: Search & Actions */}
         <div className="flex items-center gap-2 pr-1.5">
-          {/* Language Switcher (Desktop) */}
           <Button
             variant="ghost"
             size="sm"
             onClick={toggleLanguage}
             className="hidden sm:flex items-center gap-1.5 text-white/80 hover:bg-white/10 hover:text-white h-8 px-3 text-xs font-medium rounded-full mr-1"
           >
-            <span className="text-base">{language === 'en' ? '🇺🇸' : '🇮🇩'}</span>
-            <span>{language === 'en' ? 'EN' : 'ID'}</span>
+            <span className="text-base">{language === "en" ? "🇺🇸" : "🇮🇩"}</span>
+            <span>{language === "en" ? "EN" : "ID"}</span>
           </Button>
 
-          {/* Search Bar */}
-          <div 
+          <div
             className="hidden md:flex items-center relative group cursor-pointer"
             onClick={() => setIsSearchOpen(true)}
           >
             <Search className="absolute left-3 w-4 h-4 text-white/40 group-hover:text-white/60 transition-colors" />
-            <Input 
-              placeholder={t.search} 
+            <Input
+              placeholder={t.search}
               className="w-48 lg:w-64 h-8 pl-9 pr-12 bg-white/5 border-white/10 text-white placeholder:text-white/40 rounded-full focus-visible:ring-1 focus-visible:ring-white/20 transition-all text-xs pointer-events-none"
               readOnly
               suppressHydrationWarning
@@ -251,7 +189,7 @@ const Navbar = () => {
             </div>
           </div>
 
-          <Link 
+          <Link
             href="#about"
             className={cn(
               buttonVariants({ variant: "default", size: "default" }),
@@ -262,17 +200,15 @@ const Navbar = () => {
             <ArrowRight className="w-3 h-3" />
           </Link>
 
-          {/* Mobile Search Trigger */}
-          <Button 
-            variant="ghost" 
-            size="icon" 
+          <Button
+            variant="ghost"
+            size="icon"
             className="md:hidden text-white/80 hover:bg-white/10 hover:text-white h-10 w-10 relative z-50"
             onClick={() => setIsSearchOpen(true)}
           >
             <Search className="h-5 w-5" />
           </Button>
 
-          {/* Mobile Menu Trigger */}
           <div className="lg:hidden">
             <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
               <SheetTrigger asChild>
@@ -289,7 +225,7 @@ const Navbar = () => {
                   <Link href="#workflow" className="text-lg font-medium hover:text-brand" onClick={() => setIsMobileMenuOpen(false)}>{t.process}</Link>
                   <Link href="#about" className="text-lg font-medium hover:text-brand" onClick={() => setIsMobileMenuOpen(false)}>{t.skills}</Link>
                   <Link href="#about" className="text-lg font-medium hover:text-brand" onClick={() => setIsMobileMenuOpen(false)}>{t.contact}</Link>
-                  
+
                   <div className="flex items-center justify-between py-4 border-t border-white/10 mt-2">
                     <span className="text-white/60">{t.languageLabel}</span>
                     <Button
@@ -298,14 +234,14 @@ const Navbar = () => {
                         onClick={toggleLanguage}
                         className="text-white hover:bg-white/10 h-8 px-3 text-xs font-medium rounded-full bg-white/5 border border-white/10"
                     >
-                        <span className="text-lg mr-2">{language === 'en' ? '🇺🇸' : '🇮🇩'}</span>
-                        {language === 'en' ? 'English' : 'Indonesia'}
+                        <span className="text-lg mr-2">{language === "en" ? "🇺🇸" : "🇮🇩"}</span>
+                        {language === "en" ? "English" : "Indonesia"}
                     </Button>
                   </div>
 
                   <hr className="border-white/10 my-2" />
-                  <Link 
-                    href="#about" 
+                  <Link
+                    href="#about"
                     onClick={() => setIsMobileMenuOpen(false)}
                     className={cn(
                       buttonVariants({ variant: "default" }),

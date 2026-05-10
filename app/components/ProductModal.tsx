@@ -11,6 +11,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import type { Product } from "@/lib/products";
+import { useLanguage } from "@/app/providers/language";
+import { translations } from "@/lib/translations";
 
 interface ProductModalProps {
   product: Product | null;
@@ -20,6 +22,9 @@ interface ProductModalProps {
 }
 
 const ProductModal = memo(function ProductModal({ product, isOpen, onClose }: ProductModalProps) {
+  const { language } = useLanguage();
+  const t = translations[language].modal;
+
   if (!product) return null;
 
   const detailedInfo = {
@@ -109,7 +114,7 @@ const ProductModal = memo(function ProductModal({ product, isOpen, onClose }: Pr
           <div className="p-8">
             {/* Description */}
             <div className="mb-8">
-              <h3 className="text-2xl font-bold text-white mb-4">About {product.name}</h3>
+              <h3 className="text-2xl font-bold text-white mb-4">{t.about} {product.name}</h3>
               <p className="text-gray-300 text-lg leading-relaxed mb-4">
                 {product.description}
               </p>
@@ -123,7 +128,7 @@ const ProductModal = memo(function ProductModal({ product, isOpen, onClose }: Pr
             <div className="grid md:grid-cols-2 gap-8">
               {/* Key Features */}
               <div>
-                <h4 className="text-xl font-semibold text-white mb-4">Key Features</h4>
+                <h4 className="text-xl font-semibold text-white mb-4">{t.keyFeatures}</h4>
                 <div className="space-y-3">
                   {product.features.map((feature, index) => (
                     <div key={index} className="flex items-center gap-3">
@@ -140,7 +145,7 @@ const ProductModal = memo(function ProductModal({ product, isOpen, onClose }: Pr
               {/* Benefits */}
               {details.benefits && (
                 <div>
-                  <h4 className="text-xl font-semibold text-white mb-4">Business Benefits</h4>
+                  <h4 className="text-xl font-semibold text-white mb-4">{t.businessBenefits}</h4>
                   <div className="space-y-3">
                     {details.benefits.map((benefit, index) => (
                       <div key={index} className="flex items-center gap-3">
@@ -160,7 +165,7 @@ const ProductModal = memo(function ProductModal({ product, isOpen, onClose }: Pr
             {/* Technology Stack */}
             {details.techStack && (
               <div className="mt-8">
-                <h4 className="text-xl font-semibold text-white mb-4">Technology Stack</h4>
+                <h4 className="text-xl font-semibold text-white mb-4">{t.techStack}</h4>
                 <div className="flex flex-wrap gap-2">
                   {details.techStack.map((tech, index) => (
                     <Badge 
@@ -179,20 +184,20 @@ const ProductModal = memo(function ProductModal({ product, isOpen, onClose }: Pr
             <div className="mt-8 p-6 bg-[#333f4d] rounded-2xl">
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
-                  <h4 className="text-lg font-semibold text-white mb-2">Ready to Get Started?</h4>
+                  <h4 className="text-lg font-semibold text-white mb-2">{t.readyToStart}</h4>
                   {details.pricing && (
                     <p className="text-2xl font-bold mb-1" style={{ color: product.color }}>
                       {details.pricing}
                     </p>
                   )}
-                  <p className="text-sm text-gray-300">30-day free trial • No setup fees</p>
+                  <p className="text-sm text-gray-300">{t.trialNote}</p>
                 </div>
                 <div className="flex gap-3">
                   <Button 
                     className="px-6 py-6 rounded-xl font-semibold text-white transition-all duration-300 hover:shadow-lg hover:scale-105 border-none"
                     style={{ backgroundColor: product.color }}
                   >
-                    Schedule Demo
+                    {t.scheduleDemo}
                   </Button>
                   <Button 
                     variant="outline"
@@ -202,7 +207,7 @@ const ProductModal = memo(function ProductModal({ product, isOpen, onClose }: Pr
                       color: product.color,
                     }}
                   >
-                    Contact Sales
+                    {t.contactSales}
                   </Button>
                 </div>
               </div>

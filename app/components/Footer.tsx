@@ -3,22 +3,26 @@
 import { memo } from "react";
 import Link from "next/link";
 import { LogoIcon, LogoText } from "./LogoV2";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Separator } from "@/components/ui/separator";
-import { 
-  Github, 
-  Linkedin, 
-  Twitter, 
-  Mail, 
-  Instagram, 
+import {
+  Github,
+  Linkedin,
+  Twitter,
+  Mail,
+  Instagram,
   ArrowRight,
   MapPin,
-  Phone
+  Phone,
 } from "lucide-react";
+import { useLanguage } from "@/app/providers/language";
+import { translations } from "@/lib/translations";
 
 const Footer = memo(function Footer() {
   const currentYear = new Date().getFullYear();
+  const { language } = useLanguage();
+  const t = translations[language].footer;
 
   return (
     <footer className="bg-white text-slate-900 pt-24 pb-12 relative overflow-hidden">
@@ -27,21 +31,21 @@ const Footer = memo(function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-20">
           <div className="max-w-2xl">
             <h2 className="text-3xl md:text-4xl font-serif font-normal text-[#1a1f26] tracking-tight mb-4">
-              Ready to transform your digital presence?
+              {t.ctaTitle}
             </h2>
             <p className="text-lg md:text-xl text-slate-600 max-w-3xl leading-relaxed font-light">
-              Let's collaborate to build something extraordinary tailored to your business needs.
+              {t.ctaSubtitle}
             </p>
           </div>
           <div className="flex-shrink-0">
-            <Link 
+            <Link
               href="#about"
               className={cn(
                 buttonVariants({ size: "lg" }),
                 "bg-[#1a1f26] text-white hover:bg-slate-800 font-bold rounded-full px-8 h-12 text-base shadow-lg hover:shadow-xl transition-all duration-300 group"
               )}
             >
-              Start a Project
+              {t.ctaButton}
               <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
             </Link>
           </div>
@@ -54,36 +58,27 @@ const Footer = memo(function Footer() {
           <div className="lg:col-span-4 flex flex-col items-center lg:items-start text-center lg:text-left space-y-6">
             <Link href="/" className="flex items-center gap-3 group">
               <LogoIcon size={42} rounded={true} />
-              <LogoText 
-                width={160} 
+              <LogoText
+                width={160}
                 height={42}
                 primaryColor="#1a1f26"
                 secondaryColor="#1a1f26"
               />
             </Link>
-            
+
             <p className="text-lg text-slate-600 max-w-sm leading-relaxed font-normal">
-              We craft high-performance software solutions that drive business growth. 
-              From custom development to digital transformation, we are your technical partner.
+              {t.brandTagline}
             </p>
           </div>
 
           {/* Links Columns */}
           <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-8">
-            {/* Services */}
             <div>
-              <h4 className="font-serif font-normal text-lg mb-4 text-[#1a1f26]">Services</h4>
+              <h4 className="font-serif font-normal text-lg mb-4 text-[#1a1f26]">{t.servicesLabel}</h4>
               <ul className="space-y-2">
-                {[
-                  "Custom Development",
-                  "Business Automation",
-                  "Cloud Infrastructure",
-                  "Digital Consulting",
-                  "UI/UX Design",
-                  "Mobile Applications"
-                ].map((item) => (
+                {t.servicesList.map((item) => (
                   <li key={item}>
-                    <Link href="#" className="text-slate-500 hover:text-[#1a1f26] transition-colors duration-200 block py-0.5 font-light text-sm">
+                    <Link href="#services" className="text-slate-500 hover:text-[#1a1f26] transition-colors duration-200 block py-0.5 font-light text-sm">
                       {item}
                     </Link>
                   </li>
@@ -91,20 +86,12 @@ const Footer = memo(function Footer() {
               </ul>
             </div>
 
-            {/* Company */}
             <div>
-              <h4 className="font-serif font-normal text-lg mb-4 text-[#1a1f26]">Company</h4>
+              <h4 className="font-serif font-normal text-lg mb-4 text-[#1a1f26]">{t.companyLabel}</h4>
               <ul className="space-y-2">
-                {[
-                  "About Us",
-                  "Our Process",
-                  "Portfolio",
-                  "Careers",
-                  "Blog",
-                  "Contact"
-                ].map((item) => (
+                {t.companyList.map((item) => (
                   <li key={item}>
-                    <Link href="#" className="text-slate-500 hover:text-[#1a1f26] transition-colors duration-200 block py-0.5 font-light text-sm">
+                    <Link href="#about" className="text-slate-500 hover:text-[#1a1f26] transition-colors duration-200 block py-0.5 font-light text-sm">
                       {item}
                     </Link>
                   </li>
@@ -112,9 +99,8 @@ const Footer = memo(function Footer() {
               </ul>
             </div>
 
-            {/* Contact Info */}
             <div>
-              <h4 className="font-serif font-normal text-lg mb-4 text-[#1a1f26]">Contact</h4>
+              <h4 className="font-serif font-normal text-lg mb-4 text-[#1a1f26]">{t.contactLabel}</h4>
               <ul className="space-y-3">
                 <li className="flex items-start gap-3 text-slate-500 font-light text-sm">
                   <Mail className="w-4 h-4 mt-0.5 text-slate-400 shrink-0" />
@@ -124,9 +110,7 @@ const Footer = memo(function Footer() {
                 </li>
                 <li className="flex items-start gap-3 text-slate-500 font-light text-sm">
                   <MapPin className="w-4 h-4 mt-0.5 text-slate-400 shrink-0" />
-                  <span>
-                    Jakarta, Indonesia
-                  </span>
+                  <span>Jakarta, Indonesia</span>
                 </li>
                 <li className="flex items-start gap-3 text-slate-500 font-light text-sm">
                   <Phone className="w-4 h-4 mt-0.5 text-slate-400 shrink-0" />
@@ -144,10 +128,9 @@ const Footer = memo(function Footer() {
         {/* Bottom Bar */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-slate-500 font-light relative">
           <div className="font-normal" suppressHydrationWarning>
-            © {currentYear} Xenostech Studio. All rights reserved.
+            © {currentYear} Xenostech Studio. {t.copyright}
           </div>
 
-          {/* Social Icons - Centered Absolute */}
           <div className="flex items-center justify-center gap-4 md:absolute md:left-1/2 md:-translate-x-1/2">
             {[
               { icon: Github, href: "https://github.com", label: "GitHub" },
@@ -169,11 +152,11 @@ const Footer = memo(function Footer() {
           </div>
 
           <div className="flex items-center gap-1 font-normal">
-             Made With <span className="text-red-500">♥</span> Rifqi Muhammad Aziz
-             <span className="mx-2 text-slate-300">•</span>
-             <a href="https://github.com/rifqimuhammadaziz" target="_blank" rel="noopener noreferrer" className="hover:text-[#1a1f26] transition-colors">
-               GitHub
-             </a>
+            {t.madeWith} <span className="text-red-500">♥</span> Rifqi Muhammad Aziz
+            <span className="mx-2 text-slate-300">•</span>
+            <a href="https://github.com/rifqimuhammadaziz" target="_blank" rel="noopener noreferrer" className="hover:text-[#1a1f26] transition-colors">
+              GitHub
+            </a>
           </div>
         </div>
       </div>

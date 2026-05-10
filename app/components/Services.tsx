@@ -3,74 +3,33 @@
 import { memo, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Code2, Cog, Cloud, LineChart, ShieldCheck, Rocket } from "lucide-react";
+import { useLanguage } from "@/app/providers/language";
+import { translations } from "@/lib/translations";
 
 const Services = memo(function Services() {
   const [activeTab, setActiveTab] = useState(0);
+  const { language } = useLanguage();
+  const t = translations[language].services;
 
   const accents = ["#1a1f26", "#0ea5e9", "#10b981", "#f59e0b", "#8b5cf6", "#ef4444"];
+  const icons = [Code2, Cog, Cloud, LineChart, ShieldCheck, Rocket];
 
-  const services = [
-    {
-      icon: Code2,
-      title: "Custom Application Development",
-      description: "Build tailored software solutions that perfectly match your business processes and requirements.",
-      features: ["Web Applications", "Mobile Apps", "Desktop Software", "API Development"],
-      detailedDesc: "We craft robust, scalable, and secure applications tailored to your unique business needs. From initial concept to final deployment, our team ensures every line of code adds value to your operations."
-    },
-    {
-      icon: Cog,
-      title: "Business Process Automation",
-      description: "Streamline your operations with intelligent automation solutions that save time and reduce costs.",
-      features: ["Workflow Automation", "Data Integration", "Process Optimization", "System Integration"],
-      detailedDesc: "Eliminate repetitive tasks and reduce human error with our advanced automation solutions. We integrate disparate systems to create a cohesive ecosystem that works 24/7 for your business."
-    },
-    {
-      icon: Cloud,
-      title: "Cloud Solutions & Infrastructure",
-      description: "Modern, scalable cloud architectures that grow with your business needs.",
-      features: ["Cloud Migration", "DevOps Setup", "Infrastructure Design", "Performance Optimization"],
-      detailedDesc: "Leverage the power of the cloud with our expert infrastructure services. Whether you need migration support, serverless architecture, or DevOps implementation, we ensure high availability and security."
-    },
-    {
-      icon: LineChart,
-      title: "Digital Transformation Consulting",
-      description: "Strategic guidance to modernize your business and leverage technology effectively.",
-      features: ["Technology Strategy", "Digital Roadmaps", "System Architecture", "Best Practices"],
-      detailedDesc: "Navigate the digital landscape with confidence. Our consultants analyze your current setup and provide actionable roadmaps to adopt cutting-edge technologies that drive growth."
-    },
-    {
-      icon: ShieldCheck,
-      title: "Software Maintenance & Support",
-      description: "Ongoing support and maintenance to keep your applications running smoothly.",
-      features: ["Bug Fixes", "Performance Tuning", "Security Updates", "Feature Enhancements"],
-      detailedDesc: "Ensure your software remains performant and secure with our dedicated support packages. We monitor, update, and optimize your applications so you can focus on your core business."
-    },
-    {
-      icon: Rocket,
-      title: "MVP & Prototype Development",
-      description: "Rapid development of minimum viable products to validate your ideas quickly.",
-      features: ["Proof of Concept", "Market Validation", "Rapid Prototyping", "Iterative Development"],
-      detailedDesc: "Turn your visionary ideas into reality fast. We build functional MVPs that allow you to test market waters, gather user feedback, and iterate quickly before full-scale development."
-    }
-  ];
+  const services = t.list;
 
   return (
     <section id="services" className="py-2 bg-white relative overflow-hidden">
-      {/* Layer 1: Most Outer - Boldest Border */}
       <div className="w-[93%] mx-auto relative z-10 border border-slate-300 p-1 rounded-none">
-        {/* Layer 2: Middle - Medium Border */}
         <div className="border border-slate-200 p-1 rounded-none">
-          {/* Layer 3: Inner - Lightest Border (Content) */}
           <div className="bg-white rounded-none border border-slate-100 py-8 md:py-12 lg:py-16">
-            
+
             <div className="w-full max-w-[1440px] mx-auto px-4 md:px-8 lg:px-12">
               <div className="text-left mb-12">
-                <span className="text-xs font-bold text-[#1a1f26] uppercase tracking-[0.3em] mb-4 block">Our Services</span>
+                <span className="text-xs font-bold text-[#1a1f26] uppercase tracking-[0.3em] mb-4 block">{t.eyebrow}</span>
                 <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-normal text-[#1a1f26] mb-4 tracking-tight leading-[0.9]">
-                  Our Expertise
+                  {t.headline}
                 </h2>
                 <p className="text-lg text-[#1a1f26] max-w-2xl leading-relaxed font-light">
-                  We offer specialized software development and consulting services to help your business scale and succeed in the digital landscape.
+                  {t.tagline}
                 </p>
               </div>
 
@@ -89,42 +48,45 @@ const Services = memo(function Services() {
                     }
                   }}
                 >
-                  {services.map((service, index) => (
-                    <button
-                      key={index}
-                      onClick={() => setActiveTab(index)}
-                      role="tab"
-                      aria-selected={activeTab === index}
-                      aria-controls={`service-panel-${index}`}
-                      id={`service-tab-${index}`}
-                      tabIndex={activeTab === index ? 0 : -1}
-                      className={cn(
-                        "relative flex items-center gap-4 p-5 rounded-none text-left transition-all duration-300 group border border-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-slate-300",
-                        activeTab === index 
-                          ? "bg-slate-50 border-slate-200 shadow-sm text-[#1a1f26] font-medium"
-                          : "text-slate-500 hover:bg-slate-50/50 hover:text-[#1a1f26]"
-                      )}
-                    >
-                      {activeTab === index && (
-                        <span
-                          aria-hidden="true"
-                          className="absolute left-0 top-0 bottom-0 w-1"
-                          style={{ backgroundColor: accents[index % accents.length] }}
-                        />
-                      )}
-                      <div className="flex-shrink-0">
-                        <service.icon
-                          size={22}
-                          strokeWidth={1.5}
-                          className={cn(
-                            "transition-colors duration-300",
-                            activeTab === index ? "text-[#1a1f26]" : "text-slate-400 group-hover:text-[#1a1f26]"
-                          )}
-                        />
-                      </div>
-                      <span className="text-lg tracking-tight">{service.title}</span>
-                    </button>
-                  ))}
+                  {services.map((service, index) => {
+                    const Icon = icons[index];
+                    return (
+                      <button
+                        key={index}
+                        onClick={() => setActiveTab(index)}
+                        role="tab"
+                        aria-selected={activeTab === index}
+                        aria-controls={`service-panel-${index}`}
+                        id={`service-tab-${index}`}
+                        tabIndex={activeTab === index ? 0 : -1}
+                        className={cn(
+                          "relative flex items-center gap-4 p-5 rounded-none text-left transition-all duration-300 group border border-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-slate-300",
+                          activeTab === index
+                            ? "bg-slate-50 border-slate-200 shadow-sm text-[#1a1f26] font-medium"
+                            : "text-slate-500 hover:bg-slate-50/50 hover:text-[#1a1f26]"
+                        )}
+                      >
+                        {activeTab === index && (
+                          <span
+                            aria-hidden="true"
+                            className="absolute left-0 top-0 bottom-0 w-1"
+                            style={{ backgroundColor: accents[index % accents.length] }}
+                          />
+                        )}
+                        <div className="flex-shrink-0">
+                          <Icon
+                            size={22}
+                            strokeWidth={1.5}
+                            className={cn(
+                              "transition-colors duration-300",
+                              activeTab === index ? "text-[#1a1f26]" : "text-slate-400 group-hover:text-[#1a1f26]"
+                            )}
+                          />
+                        </div>
+                        <span className="text-lg tracking-tight">{service.title}</span>
+                      </button>
+                    );
+                  })}
                 </div>
 
                 <div className="w-full lg:w-2/3">
@@ -140,13 +102,13 @@ const Services = memo(function Services() {
                         <h3 key={activeTab} className="text-2xl md:text-3xl font-serif font-medium text-[#1a1f26] mb-6 animate-in fade-in slide-in-from-bottom-2 duration-500 tracking-tight">
                           {services[activeTab].title}
                         </h3>
-                        
+
                         <p key={activeTab + 'desc'} className="text-base md:text-lg text-slate-600 mb-8 leading-relaxed animate-in fade-in slide-in-from-bottom-3 duration-500 delay-100 font-normal">
                           {services[activeTab].detailedDesc}
                         </p>
 
                         <div className="text-xs font-bold text-slate-400 uppercase tracking-[0.2em] mb-6">
-                          Key Features
+                          {t.keyFeatures}
                         </div>
                         <div key={activeTab + 'features'} className="grid grid-cols-1 md:grid-cols-2 gap-4 animate-in fade-in slide-in-from-bottom-4 duration-500 delay-200">
                           {services[activeTab].features.map((feature, idx) => (

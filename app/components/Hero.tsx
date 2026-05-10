@@ -6,6 +6,8 @@ import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { products, type Product } from "@/lib/products";
 import ProductModal from "./ProductModal";
+import { useLanguage } from "@/app/providers/language";
+import { translations } from "@/lib/translations";
 
 const Hero = memo(function Hero() {
   const [isVisible, setIsVisible] = useState(false);
@@ -20,6 +22,8 @@ const Hero = memo(function Hero() {
   } | null>(null);
   const [trackState, setTrackState] = useState({ width: 100, left: 0 });
   const scrollRef = useRef<HTMLDivElement>(null);
+  const { language } = useLanguage();
+  const t = translations[language].hero;
 
   useEffect(() => {
     setIsVisible(true);
@@ -81,7 +85,6 @@ const Hero = memo(function Hero() {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white pt-48 pb-32">
-      {/* Floating Text Below Navbar - Only rendered on client to avoid hydration mismatch */}
       {isVisible && (
         <div
           className="fixed top-[68px] left-1/2 z-40 w-[98%] max-w-[1440px] flex justify-center pointer-events-none transition-all duration-300 ease-out"
@@ -94,21 +97,20 @@ const Hero = memo(function Hero() {
           <div className="w-full bg-white/10 backdrop-blur-md border border-slate-200/20 py-2.5 rounded-full shadow-sm flex items-center justify-center gap-6 px-6 text-slate-600 text-xs md:text-sm font-medium tracking-wide" suppressHydrationWarning>
             <div className="flex items-center gap-2">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shadow-[0_0_8px_rgba(16,185,129,0.5)]"></span>
-              <span className="text-[#1a1f26]">Available for new projects</span>
+              <span className="text-[#1a1f26]">{t.statusOnline}</span>
             </div>
             <span className="text-slate-300 hidden md:inline">•</span>
-            <span className="hidden md:inline text-[#1a1f26]">Custom Development</span>
+            <span className="hidden md:inline text-[#1a1f26]">{t.tagCustomDev}</span>
             <span className="text-slate-300 hidden md:inline">•</span>
-            <span className="hidden md:inline text-[#1a1f26]">Cloud Infrastructure</span>
+            <span className="hidden md:inline text-[#1a1f26]">{t.tagCloudInfra}</span>
             <span className="text-slate-300 hidden md:inline">•</span>
-            <span className="hidden md:inline text-[#1a1f26]">UI/UX Design</span>
+            <span className="hidden md:inline text-[#1a1f26]">{t.tagUIUX}</span>
             <span className="text-slate-300 hidden md:inline">•</span>
-            <span className="hidden md:inline text-emerald-600">24/7 Support</span>
+            <span className="hidden md:inline text-emerald-600">{t.tagSupport}</span>
           </div>
         </div>
       )}
 
-      {/* Background Image */}
       <div className="absolute inset-0 pointer-events-none">
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30"
@@ -118,7 +120,6 @@ const Hero = memo(function Hero() {
       </div>
 
       <div className="w-[98%] max-w-[1440px] mx-auto px-6 relative z-10 text-center">
-        {/* Main Heading & Subtext */}
         <div className={cn(
           "mb-12 transition-all duration-1000 ease-out flex flex-col items-center",
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
@@ -126,30 +127,24 @@ const Hero = memo(function Hero() {
           <div className="flex items-center gap-4 mb-6 opacity-80">
             <span className="w-12 h-[1px] bg-gradient-to-r from-transparent to-[#1a1f26]/50"></span>
             <span className="text-sm md:text-sm text-[#1a1f26] max-w-2xl leading-relaxed font-normal">
-              Transform your business ideas into digital products
+              {t.eyebrow}
             </span>
             <span className="w-12 h-[1px] bg-gradient-to-l from-transparent to-[#1a1f26]/50"></span>
           </div>
 
-          <h1 className="font-serif text-4xl md:text-5xl lg:text-7xl font-medium text-[#1a1f26] mb-8 leading-[1.05] tracking-tight max-w-5xl">
-            Software Solutions, <br />
-            Development, and{" "}
+          <h1 className="font-serif text-4xl md:text-5xl lg:text-7xl font-medium text-[#1a1f26] leading-[1.05] tracking-tight max-w-5xl">
+            {t.headlineLine1} <br />
+            {t.headlineLine2}{" "}
             <span className="relative inline-block">
-              <span className="relative z-10">Innovation.</span>
+              <span className="relative z-10">{t.headlineHighlight}</span>
               <span
                 aria-hidden
                 className="absolute left-0 right-0 bottom-1 md:bottom-2 h-2 md:h-3 bg-[#13bfb5]/30"
               />
             </span>
           </h1>
-
-          <p className="text-base md:text-lg text-slate-600 max-w-2xl leading-relaxed font-normal">
-            We craft software for ambitious teams. From custom development to digital transformation,
-            we build solutions that drive real business outcomes.
-          </p>
         </div>
 
-        {/* CTA Buttons */}
         <div className={cn(
           "flex flex-col sm:flex-row gap-4 mb-8 justify-center transition-all duration-1000 ease-out delay-300",
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
@@ -161,7 +156,7 @@ const Hero = memo(function Hero() {
               "h-14 px-8 rounded-full text-base font-bold shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 bg-[#1a1f26] text-white hover:bg-slate-800"
             )}
           >
-            View Our Work
+            {t.ctaPrimary}
           </Link>
           <Link
             href="#about"
@@ -170,11 +165,10 @@ const Hero = memo(function Hero() {
               "h-14 px-8 rounded-full text-base font-bold bg-white border-slate-300 text-[#1a1f26] hover:bg-slate-50 hover:border-[#1a1f26] shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300"
             )}
           >
-            Talk to Us
+            {t.ctaSecondary}
           </Link>
         </div>
 
-        {/* Selected Work Showcase */}
         <div
           id="work"
           className={cn(
@@ -186,7 +180,7 @@ const Hero = memo(function Hero() {
             <div className="flex items-center gap-3">
               <span className="w-12 h-px bg-[#1a1f26]/30" aria-hidden />
               <span className="text-xs font-bold text-[#1a1f26] uppercase tracking-[0.3em]">
-                Selected Work
+                {t.selectedWork}
               </span>
             </div>
           </div>
@@ -229,7 +223,6 @@ const Hero = memo(function Hero() {
             </div>
           </div>
 
-          {/* Slide indicator */}
           <div className="flex justify-center mt-6">
             <div
               className="relative w-48 md:w-64 h-1 bg-slate-200 rounded-full overflow-hidden"
